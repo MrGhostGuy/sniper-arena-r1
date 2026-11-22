@@ -1,0 +1,4 @@
+*{margin:0;padding:0;box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+html,body{width:240px;height:282px;overflow:hidden;background:#000;color:#fff;font-family:monospace;touch-action:none;overscroll-behavior:none}
+::-webkit-scrollbar{display:none}
+canvas{display:block;width:240px;height:282px;image-rendering:pixelated;touch-action:none}
