@@ -22,7 +22,7 @@
    All art, names and code are original to this creation.
    ============================================================ */
 var cv=document.getElementById('cv'), ctx=cv.getContext('2d');
-var W=480,H=564, WORLD_W=1500, WORLD_H=564;
+var W=480,H=564, GH=400, WORLD_W=1500, WORLD_H=564;
 
 /* ---------------- ITEM DATA ---------------- */
 var RARITIES=[
@@ -37,48 +37,60 @@ function rar(id){for(var i=0;i<RARITIES.length;i++)if(RARITIES[i].id===id)return
 /* bolt=ms between shots, zoom=max scope level, sway=drift px (lower better), pan=camera speed x */
 var SNIPERS=[
  /* COMMON */
- {id:'sr_ranch',  name:'Ranch Hand .22',    rar:'common',   bolt:760, zoom:2, sway:9,  pan:1.00, body:'#7a6a55', accent:'#c9b894'},
- {id:'sr_scout',  name:'Scout Carbine',     rar:'common',   bolt:730, zoom:2, sway:8,  pan:1.05, body:'#5d6b5d', accent:'#9fb29f'},
- {id:'sr_ranger', name:'Ranger 700',        rar:'common',   bolt:740, zoom:2, sway:8,  pan:1.00, body:'#6b5a44', accent:'#d8c49a'},
- {id:'sr_militia',name:'Militia Longshot',  rar:'common',   bolt:780, zoom:2, sway:10, pan:0.95, body:'#555b66', accent:'#aab4c4'},
- {id:'sr_hunter', name:"Hunter's Pride",    rar:'common',   bolt:720, zoom:2, sway:9,  pan:1.00, body:'#71563a', accent:'#e0aa6e'},
- {id:'sr_depot',  name:'Depot Special',     rar:'common',   bolt:750, zoom:2, sway:9,  pan:1.02, body:'#4e5a68', accent:'#8fa8bf'},
- {id:'sr_farm',   name:'Farmhand Deluxe',   rar:'common',   bolt:735, zoom:2, sway:8,  pan:1.03, body:'#77683f', accent:'#cbb26a'},
- {id:'sr_rookie', name:'Rookie .308',       rar:'common',   bolt:745, zoom:2, sway:9,  pan:1.00, body:'#606a72', accent:'#cfd8e0'},
+ {id:'sr_ranch',  name:'Ranch Hand .22',    rar:'common',   bolt:760, zoom:2, sway:9,  pan:1.00, body:'#7a6a55', accent:'#c9b894', m:'classic'},
+ {id:'sr_scout',  name:'Scout Carbine',     rar:'common',   bolt:730, zoom:2, sway:8,  pan:1.05, body:'#5d6b5d', accent:'#9fb29f', m:'scout'},
+ {id:'sr_ranger', name:'Ranger 700',        rar:'common',   bolt:740, zoom:2, sway:8,  pan:1.00, body:'#6b5a44', accent:'#d8c49a', m:'classic'},
+ {id:'sr_militia',name:'Militia Longshot',  rar:'common',   bolt:780, zoom:2, sway:10, pan:0.95, body:'#555b66', accent:'#aab4c4', m:'classic'},
+ {id:'sr_hunter', name:"Hunter's Pride",    rar:'common',   bolt:720, zoom:2, sway:9,  pan:1.00, body:'#71563a', accent:'#e0aa6e', m:'classic'},
+ {id:'sr_depot',  name:'Depot Special',     rar:'common',   bolt:750, zoom:2, sway:9,  pan:1.02, body:'#4e5a68', accent:'#8fa8bf', m:'scout'},
+ {id:'sr_farm',   name:'Farmhand Deluxe',   rar:'common',   bolt:735, zoom:2, sway:8,  pan:1.03, body:'#77683f', accent:'#cbb26a', m:'classic'},
+ {id:'sr_rookie', name:'Rookie .308',       rar:'common',   bolt:745, zoom:2, sway:9,  pan:1.00, body:'#606a72', accent:'#cfd8e0', m:'scout'},
  /* RARE */
- {id:'sr_cobalt', name:'Cobalt Viper',      rar:'rare',     bolt:680, zoom:2, sway:7,  pan:1.08, body:'#274b73', accent:'#3fa9f5'},
- {id:'sr_tide',   name:'Tidecaller',        rar:'rare',     bolt:665, zoom:2, sway:7,  pan:1.10, body:'#1f5f6e', accent:'#39d0d8'},
- {id:'sr_jackal', name:'Jackal .50',        rar:'rare',     bolt:700, zoom:3, sway:7,  pan:1.02, body:'#6e5a2e', accent:'#ffd23f'},
- {id:'sr_onyx',   name:'Onyx Patrol',       rar:'rare',     bolt:660, zoom:2, sway:6,  pan:1.10, body:'#23242c', accent:'#8f9bb0'},
- {id:'sr_cinder', name:'Cinderline',        rar:'rare',     bolt:675, zoom:2, sway:7,  pan:1.06, body:'#73392a', accent:'#ff7a45'},
- {id:'sr_harbor', name:'Harbor Master',     rar:'rare',     bolt:670, zoom:3, sway:7,  pan:1.04, body:'#2e5d50', accent:'#5fe0b0'},
- {id:'sr_slate',  name:'Slate Reaper',      rar:'rare',     bolt:655, zoom:2, sway:6,  pan:1.12, body:'#3c4356', accent:'#a9c6ff'},
- {id:'sr_comet',  name:'Comet Tail',        rar:'rare',     bolt:650, zoom:2, sway:6,  pan:1.14, body:'#4a3a6b', accent:'#c9a7ff'},
- /* EPIC */
- {id:'sr_ultraviolet',name:'Ultraviolet',   rar:'epic',     bolt:600, zoom:3, sway:5,  pan:1.15, body:'#3d1f66', accent:'#b45cff'},
- {id:'sr_nightmarket',name:'Night Market',  rar:'epic',     bolt:590, zoom:3, sway:5,  pan:1.16, body:'#1c2b26', accent:'#37ff9a'},
- {id:'sr_bloodmoon', name:'Bloodmoon Howl', rar:'epic',     bolt:610, zoom:3, sway:5,  pan:1.12, body:'#571f2b', accent:'#ff3b5c'},
- {id:'sr_gilded', name:'Gilded Hour',        rar:'epic',     bolt:585, zoom:3, sway:5,  pan:1.15, body:'#5c4a17', accent:'#ffd700'},
- {id:'sr_tempest',name:'Tempest Glass',      rar:'epic',     bolt:595, zoom:3, sway:4,  pan:1.20, body:'#274b63', accent:'#7fe7ff'},
- {id:'sr_venom',  name:'Venom Garden',       rar:'epic',     bolt:580, zoom:3, sway:5,  pan:1.18, body:'#2f521f', accent:'#a6ff3f'},
- {id:'sr_mirage', name:'Mirage Saint',       rar:'epic',     bolt:575, zoom:3, sway:4,  pan:1.20, body:'#6b5636', accent:'#ffe9a8'},
- /* LEGENDARY */
- {id:'sr_suncrown',name:'Suncrown Regent',  rar:'legendary',bolt:520, zoom:3, sway:3,  pan:1.25, body:'#6e5310', accent:'#ffb400'},
- {id:'sr_kraken', name:'Kraken Depth',       rar:'legendary',bolt:530, zoom:3, sway:3,  pan:1.22, body:'#0f3a4d', accent:'#19c2ff'},
- {id:'sr_widow',  name:'Widow Waltz',        rar:'legendary',bolt:510, zoom:3, sway:3,  pan:1.28, body:'#191922', accent:'#e8e8f2'},
- {id:'sr_inferno',name:'Inferno Parade',    rar:'legendary',bolt:540, zoom:3, sway:4,  pan:1.24, body:'#5e1f10', accent:'#ff6a00'},
- {id:'sr_aurora', name:'Aurora Veil',        rar:'legendary',bolt:515, zoom:3, sway:3,  pan:1.27, body:'#173d33', accent:'#5fffc9'},
- {id:'sr_monarch',name:'Monarch Decree',     rar:'legendary',bolt:505, zoom:3, sway:3,  pan:1.30, body:'#40305e', accent:'#ffb400'},
+ {id:'sr_cobalt', name:'Cobalt Viper',      rar:'rare',     bolt:680, zoom:2, sway:7,  pan:1.08, body:'#274b73', accent:'#3fa9f5', m:'tactical'},
+ {id:'sr_tide',   name:'Tidecaller',        rar:'rare',     bolt:665, zoom:2, sway:7,  pan:1.10, body:'#1f5f6e', accent:'#39d0d8', m:'dmr', mz:'supp'},
+ {id:'sr_jackal', name:'Jackal .50',        rar:'rare',     bolt:700, zoom:3, sway:7,  pan:1.02, body:'#6e5a2e', accent:'#ffd23f', m:'antimag'},
+ {id:'sr_onyx',   name:'Onyx Patrol',       rar:'rare',     bolt:660, zoom:2, sway:6,  pan:1.10, body:'#23242c', accent:'#8f9bb0', m:'tactical'},
+ {id:'sr_cinder', name:'Cinderline',        rar:'rare',     bolt:675, zoom:2, sway:7,  pan:1.06, body:'#73392a', accent:'#ff7a45', m:'dmr'},
+ {id:'sr_harbor', name:'Harbor Master',     rar:'rare',     bolt:670, zoom:3, sway:7,  pan:1.04, body:'#2e5d50', accent:'#5fe0b0', m:'tactical'},
+ {id:'sr_slate',  name:'Slate Reaper',      rar:'rare',     bolt:655, zoom:2, sway:6,  pan:1.12, body:'#3c4356', accent:'#a9c6ff', m:'dmr'},
+ {id:'sr_comet',  name:'Comet Tail',        rar:'rare',     bolt:650, zoom:2, sway:6,  pan:1.14, body:'#4a3a6b', accent:'#c9a7ff', m:'scout'},
+ /* EPIC — animated pulse trim */
+ {id:'sr_ultraviolet',name:'Ultraviolet',   rar:'epic',     bolt:600, zoom:3, sway:5,  pan:1.15, body:'#3d1f66', accent:'#b45cff', m:'tactical', fx:'pulse'},
+ {id:'sr_nightmarket',name:'Night Market',  rar:'epic',     bolt:590, zoom:3, sway:5,  pan:1.16, body:'#1c2b26', accent:'#37ff9a', m:'bullpup', mz:'supp', fx:'pulse'},
+ {id:'sr_bloodmoon', name:'Bloodmoon Howl', rar:'epic',     bolt:610, zoom:3, sway:5,  pan:1.12, body:'#571f2b', accent:'#ff3b5c', m:'dmr', fx:'pulse'},
+ {id:'sr_gilded', name:'Gilded Hour',        rar:'epic',     bolt:585, zoom:3, sway:5,  pan:1.15, body:'#5c4a17', accent:'#ffd700', m:'royal', fx:'pulse'},
+ {id:'sr_tempest',name:'Tempest Glass',      rar:'epic',     bolt:595, zoom:3, sway:4,  pan:1.20, body:'#274b63', accent:'#7fe7ff', m:'tactical', fx:'pulse'},
+ {id:'sr_venom',  name:'Venom Garden',       rar:'epic',     bolt:580, zoom:3, sway:5,  pan:1.18, body:'#2f521f', accent:'#a6ff3f', m:'dmr', fx:'pulse'},
+ {id:'sr_mirage', name:'Mirage Saint',       rar:'epic',     bolt:575, zoom:3, sway:4,  pan:1.20, body:'#6b5636', accent:'#ffe9a8', m:'royal', fx:'pulse'},
+ /* LEGENDARY — named animated effects */
+ {id:'sr_suncrown',name:'Suncrown Regent',  rar:'legendary',bolt:520, zoom:3, sway:3,  pan:1.25, body:'#6e5310', accent:'#ffb400', m:'royal', fx:'gold'},
+ {id:'sr_kraken', name:'Kraken Depth',       rar:'legendary',bolt:530, zoom:3, sway:3,  pan:1.22, body:'#0f3a4d', accent:'#19c2ff', m:'antimag', fx:'frost'},
+ {id:'sr_widow',  name:'Widow Waltz',        rar:'legendary',bolt:510, zoom:3, sway:3,  pan:1.28, body:'#191922', accent:'#e8e8f2', m:'bullpup', mz:'supp', fx:'void'},
+ {id:'sr_inferno',name:'Inferno Parade',    rar:'legendary',bolt:540, zoom:3, sway:4,  pan:1.24, body:'#5e1f10', accent:'#ff6a00', m:'dmr', fx:'ember'},
+ {id:'sr_aurora', name:'Aurora Veil',        rar:'legendary',bolt:515, zoom:3, sway:3,  pan:1.27, body:'#173d33', accent:'#5fffc9', m:'tactical', fx:'arc'},
+ {id:'sr_monarch',name:'Monarch Decree',     rar:'legendary',bolt:505, zoom:3, sway:3,  pan:1.30, body:'#40305e', accent:'#ffb400', m:'royal', fx:'gold'},
  /* MYTHIC */
- {id:'sr_gravebell',name:'Gravebell Toll',  rar:'mythic',   bolt:460, zoom:3, sway:2,  pan:1.35, body:'#1d1d26', accent:'#ff3b5c'},
- {id:'sr_stormgod', name:'Stormgod Oath',   rar:'mythic',   bolt:450, zoom:3, sway:2,  pan:1.38, body:'#14273d', accent:'#59b7ff'},
- {id:'sr_bonecourt',name:'Bonecourt Judge', rar:'mythic',   bolt:455, zoom:3, sway:2,  pan:1.36, body:'#3a3a42', accent:'#f2f2f2'},
- {id:'sr_emberthrone',name:'Emberthrone',   rar:'mythic',   bolt:445, zoom:3, sway:2,  pan:1.40, body:'#40160c', accent:'#ff8c1a'},
- /* PHANTOM */
- {id:'sr_phantomzero',name:'Phantom Zero',  rar:'phantom',  bolt:390, zoom:3, sway:1,  pan:1.50, body:'#0b2b26', accent:'#2affd5'},
- {id:'sr_lastlight', name:'Last Light',      rar:'phantom',  bolt:380, zoom:3, sway:1,  pan:1.52, body:'#26262e', accent:'#2affd5'},
- {id:'sr_ghostlegacy',name:'GHOST LEGACY',   rar:'phantom',  bolt:370, zoom:3, sway:1,  pan:1.55, body:'#101018', accent:'#2affd5'}
+ {id:'sr_gravebell',name:'Gravebell Toll',  rar:'mythic',   bolt:460, zoom:3, sway:2,  pan:1.35, body:'#1d1d26', accent:'#ff3b5c', m:'bone', fx:'void'},
+ {id:'sr_stormgod', name:'Stormgod Oath',   rar:'mythic',   bolt:450, zoom:3, sway:2,  pan:1.38, body:'#14273d', accent:'#59b7ff', m:'rail', fx:'arc'},
+ {id:'sr_bonecourt',name:'Bonecourt Judge', rar:'mythic',   bolt:455, zoom:3, sway:2,  pan:1.36, body:'#3a3a42', accent:'#f2f2f2', m:'bone', fx:'frost'},
+ {id:'sr_emberthrone',name:'Emberthrone',   rar:'mythic',   bolt:445, zoom:3, sway:2,  pan:1.40, body:'#40160c', accent:'#ff8c1a', m:'royal', fx:'ember'},
+ /* PHANTOM — holographic rail platforms */
+ {id:'sr_phantomzero',name:'Phantom Zero',  rar:'phantom',  bolt:390, zoom:3, sway:1,  pan:1.50, body:'#0b2b26', accent:'#2affd5', m:'rail', fx:'holo'},
+ {id:'sr_lastlight', name:'Last Light',      rar:'phantom',  bolt:380, zoom:3, sway:1,  pan:1.52, body:'#26262e', accent:'#2affd5', m:'rail', fx:'holo'},
+ {id:'sr_ghostlegacy',name:'GHOST LEGACY',   rar:'phantom',  bolt:370, zoom:3, sway:1,  pan:1.55, body:'#101018', accent:'#2affd5', m:'rail', fx:'holo'}
 ];
+/* Distinct rifle models — silhouette, barrel, scope, magazine, muzzle all differ */
+var MODELS={
+ classic:{stock:'wood',    barrel:64, bore:3,   scope:22, mag:'box',    muzzle:'plain'},
+ scout:{stock:'tactical',  barrel:42, bore:3,   scope:14, mag:'box',    muzzle:'plain'},
+ tactical:{stock:'tactical',barrel:56, bore:3.5, scope:26, mag:'box',    muzzle:'brake'},
+ dmr:{stock:'tactical',    barrel:60, bore:3.5, scope:30, mag:'curved', muzzle:'brake'},
+ bullpup:{stock:'bullpup', barrel:52, bore:3.5, scope:24, mag:'bullpup',muzzle:'brake'},
+ antimag:{stock:'heavy',   barrel:74, bore:6,   scope:36, mag:'box',    muzzle:'brakeXL', bipod:true},
+ royal:{stock:'wood',      barrel:62, bore:4,   scope:30, mag:'curved', muzzle:'crown'},
+ bone:{stock:'skeleton',  barrel:66, bore:4,   scope:32, mag:'box',    muzzle:'suppressor'},
+ rail:{stock:'rail',       barrel:70, bore:0,   scope:28, mag:'cell',   muzzle:'none'}
+};
 function sniperById(id){for(var i=0;i<SNIPERS.length;i++)if(SNIPERS[i].id===id)return SNIPERS[i];return SNIPERS[0];}
 var DUPE_COINS={common:15,rare:40,epic:120,legendary:350,mythic:900,phantom:2500};
 /* odds are weights per rarity inside each case */
@@ -161,11 +173,11 @@ function nextWave(){
 var SPOTS=[];
 (function(){
  var defs=[
-  {x:120,y:338,t:'roof'},{x:270,y:292,t:'window'},{x:430,y:352,t:'crate'},
+  {x:248,y:338,t:'roof'},{x:270,y:292,t:'window'},{x:430,y:352,t:'crate'},
   {x:560,y:268,t:'tower'},{x:700,y:330,t:'roof'},{x:845,y:296,t:'window'},
   {x:990,y:348,t:'crate'},{x:1120,y:262,t:'tower'},{x:1265,y:326,t:'roof'},
-  {x:1390,y:300,t:'window'},{x:360,y:352,t:'crate'},{x:920,y:352,t:'roof'},
-  {x:180,y:300,t:'window'},{x:640,y:352,t:'roof'},{x:1200,y:352,t:'crate'}
+  {x:1248,y:300,t:'window'},{x:360,y:352,t:'crate'},{x:920,y:352,t:'roof'},
+  {x:262,y:300,t:'window'},{x:640,y:352,t:'roof'},{x:1200,y:352,t:'crate'}
  ];
  for(var i=0;i<defs.length;i++)SPOTS.push(defs[i]);
 })();
@@ -186,7 +198,7 @@ function feed(txt,color){G.feed.unshift({txt:txt,color:color||'#dfe6ee',t:4000})
 function pop(x,y,txt,color){G.pops.push({x:x,y:y,txt:txt,color:color,t:1100});}
 
 function viewW(){return W/G.zoom;}
-function viewH(){return H/G.zoom;}
+function viewH(){return GH/G.zoom;}
 function camY(){return G?G.camY:0;}
 function crossWorld(){
  var sway=sniperById(save.equipped).sway*(G.zoom>1?0.55:1);
@@ -239,8 +251,8 @@ function update(dt){
  var maxCam=WORLD_W-viewW();if(G.camX<0)G.camX=0;if(G.camX>maxCam)G.camX=maxCam;
  if(G.camTX<0)G.camTX=0;if(G.camTX>WORLD_W-viewW())G.camTX=WORLD_W-viewW();
  G.camY+=(G.camTY-G.camY)*Math.min(1,dt/55);
- var maxCamY=H-viewH();if(G.camY<0)G.camY=0;if(G.camY>maxCamY)G.camY=maxCamY;
- if(G.camTY<0)G.camTY=0;if(G.camTY>H-viewH())G.camTY=H-viewH();
+ var maxCamY=WORLD_H-viewH();if(G.camY<0)G.camY=0;if(G.camY>maxCamY)G.camY=maxCamY;
+ if(G.camTY<0)G.camTY=0;if(G.camTY>WORLD_H-viewH())G.camTY=WORLD_H-viewH();
  /* gentle vertical aim-assist toward nearest visible enemy's mid-body */
  var assistT=0,bestD=1e9;
  for(var ai=0;ai<G.enemies.length;ai++){var ae=G.enemies[ai];
@@ -282,16 +294,75 @@ function drawButtons(){for(var i=0;i<buttons.length;i++){var b=buttons[i];
  else if(b.style==='ghost'){panel(b.x,b.y,b.w,b.h,'rgba(16,22,38,0.85)','#3fa9f5');txt(b.label,b.x+b.w/2,b.y+b.h/2,13,'#cfe8ff','center');}
  else if(b.style==='dim'){panel(b.x,b.y,b.w,b.h,'rgba(30,34,46,0.9)','#565f73');txt(b.label,b.x+b.w/2,b.y+b.h/2,13,'#8b95a9','center');}
  else{panel(b.x,b.y,b.w,b.h,'rgba(14,26,20,0.92)','#2affd5');txt(b.label,b.x+b.w/2,b.y+b.h/2,16,'#eafffa','center');}}}
-function drawRifle(cx,baseY,s,scale){
- var b=s.body,a=s.accent;ctx.save();ctx.translate(cx,baseY);ctx.scale(scale,scale);
+function rr(x,y,w,h,r,fill){ ctx.fillStyle=fill; ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); ctx.fill(); }
+function prand(i,k){ var x=Math.sin(i*127.1+k*311.7)*43758.5453; return x-Math.floor(x); }
+function drawRifleFX(s,now,tipX){
+ var a=s.accent,i,px,py;
+ if(s.fx==='pulse'){ ctx.strokeStyle=a; ctx.globalAlpha=0.22+0.3*(0.5+0.5*Math.sin(now/300)); ctx.lineWidth=1.6; ctx.beginPath(); ctx.moveTo(-20,-9.5); ctx.lineTo(tipX,-9.5); ctx.stroke(); ctx.globalAlpha=1; }
+ else if(s.fx==='ember'){ for(i=0;i<9;i++){ var ph=(now*0.028+i*43)%52; px=-56+prand(i,1)*130; py=12-ph; ctx.fillStyle=i%3?'#ff8c1a':'#ffd23f'; ctx.globalAlpha=Math.max(0,0.85-ph/52); ctx.fillRect(px,py,2.4,2.4); } ctx.globalAlpha=1; }
+ else if(s.fx==='frost'){ for(i=0;i<8;i++){ var ph2=(now*0.016+i*37)%44; px=-50+prand(i,2)*120; py=-16+ph2; ctx.fillStyle='#bfefff'; ctx.globalAlpha=Math.max(0,0.6-ph2/60); ctx.fillRect(px,py,2,2); } ctx.globalAlpha=1; }
+ else if(s.fx==='gold'){ for(i=0;i<7;i++){ var tw=0.5+0.5*Math.sin(now/170+i*1.7); px=-58+prand(i,3)*136; py=-20+prand(i,4)*34; ctx.fillStyle='#ffe98a'; ctx.globalAlpha=tw; ctx.fillRect(px-1,py-3.4,2,6.8); ctx.fillRect(px-3.4,py-1,6.8,2); } ctx.globalAlpha=1; }
+ else if(s.fx==='void'){ for(i=0;i<8;i++){ var ph3=(now*0.02+i*29)%40; px=-46+prand(i,5)*110; py=10-ph3; ctx.fillStyle=i%2?'#7a2aff':'#ff3b5c'; ctx.globalAlpha=Math.max(0,0.55-ph3/46); ctx.beginPath(); ctx.arc(px,py,2.6,0,7); ctx.fill(); } ctx.globalAlpha=1; }
+ else if(s.fx==='arc'){ var seed=Math.floor(now/95); ctx.strokeStyle='#9fdcff'; ctx.lineWidth=1.4; for(var j=0;j<3;j++){ ctx.globalAlpha=0.35+0.5*prand(seed,j+11); ctx.beginPath(); var sx2=-16+prand(seed+j,6)*30, sy2=-14; ctx.moveTo(sx2,sy2); for(var q=1;q<=4;q++) ctx.lineTo(sx2+q*9, sy2+(prand(seed*3+q,j+21)-0.5)*13); ctx.stroke(); } ctx.globalAlpha=1; }
+ else if(s.fx==='holo'){ var sweep=((now*0.09)%190)-95; ctx.fillStyle='rgba(42,255,213,0.20)'; ctx.fillRect(sweep,-24,10,48); ctx.strokeStyle=a; ctx.globalAlpha=0.7; ctx.setLineDash([5,5]); ctx.lineDashOffset=-now/24; ctx.beginPath(); ctx.arc(-6,-30,13,0,7); ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha=1; }
+}
+function drawRifle(cx,baseY,s,scale,now){
+ now=now||0;
+ var M=MODELS[s.m]||MODELS.tactical, b=s.body, a=s.accent, mini=scale<0.8;
+ ctx.save(); ctx.translate(cx,baseY); ctx.scale(scale,scale);
+ if(s.fx==='holo'&&(now%1200)<70)ctx.translate(2,0);
+ ctx.fillStyle='rgba(0,0,0,0.35)'; ctx.beginPath(); ctx.ellipse(2,17,76,7,0,0,7); ctx.fill();
+ var muz=(s.mz==='supp')?'suppressor':M.muzzle;
+ /* stock / rear body */
  ctx.fillStyle=b;
- ctx.beginPath();ctx.moveTo(-58,10);ctx.lineTo(-30,-2);ctx.lineTo(6,-4);ctx.lineTo(10,6);ctx.lineTo(-24,12);ctx.lineTo(-52,18);ctx.closePath();ctx.fill(); /* stock+body */
- ctx.fillRect(4,-3,64,5); /* barrel */
- ctx.fillStyle=a;ctx.fillRect(58,-4,14,7); /* muzzle */
- ctx.fillRect(-16,-13,26,6); /* scope tube */
- ctx.fillStyle='#0a0e14';ctx.fillRect(-19,-14,5,8);ctx.fillRect(9,-14,5,8);
- ctx.fillStyle=a;ctx.fillRect(-34,10,20,10); /* mag */
- ctx.fillStyle='rgba(0,0,0,0.25)';ctx.fillRect(-58,14,120,3);
+ if(M.stock==='wood'){ ctx.beginPath(); ctx.moveTo(-72,2); ctx.quadraticCurveTo(-70,14,-52,15); ctx.lineTo(-30,10); ctx.lineTo(-24,-4); ctx.lineTo(-44,-6); ctx.quadraticCurveTo(-62,-4,-72,2); ctx.fill(); }
+ else if(M.stock==='skeleton'){ ctx.strokeStyle=b; ctx.lineWidth=5; ctx.strokeRect(-70,-4,44,14); ctx.fillStyle=b; ctx.fillRect(-34,-2,10,10); }
+ else if(M.stock==='bullpup'){ rr(-72,-8,86,24,5,b); }
+ else if(M.stock==='rail'){ rr(-70,-6,74,18,8,b); }
+ else if(M.stock==='heavy'){ rr(-70,-4,46,11,3,b); ctx.fillStyle=b; ctx.fillRect(-64,7,34,9); ctx.fillRect(-40,-9,16,7); }
+ else { rr(-70,-3,42,9,3,b); ctx.fillStyle=b; ctx.fillRect(-66,6,30,8); ctx.fillRect(-40,-8,14,6); }
+ /* receiver + accent stripe */
+ rr(-28,-7,52,13,3,b);
+ ctx.fillStyle=a; ctx.fillRect(-24,3,44,2.4);
+ /* handguard with vents */
+ rr(24,-5,M.barrel*0.45,10,2,b);
+ ctx.fillStyle='rgba(0,0,0,0.35)';
+ for(var v=0;v<3;v++)ctx.fillRect(30+v*7,-3,3,6);
+ /* barrel / rails */
+ var bx=24+M.barrel*0.45, blen=M.barrel*0.55, mx=bx+blen;
+ if(M.stock==='rail'){
+  ctx.fillStyle=b; ctx.fillRect(bx,-6,blen,3.4); ctx.fillRect(bx,2.6,blen,3.4);
+  ctx.fillStyle=a; ctx.globalAlpha=0.55+0.45*Math.sin(now/160); ctx.fillRect(bx,-1.4,blen,2.8); ctx.globalAlpha=1;
+  ctx.strokeStyle=a; ctx.lineWidth=2;
+  for(var c2=0;c2<4;c2++){ ctx.beginPath(); ctx.arc(bx+8+c2*Math.max(6,(blen-14)/3),0,5.4,0,7); ctx.stroke(); }
+ } else {
+  ctx.fillStyle='#11141c'; ctx.fillRect(bx,-M.bore/2,blen,M.bore);
+  ctx.fillStyle=b; ctx.fillRect(bx,-M.bore/2-1.6,blen*0.5,1.8);
+ }
+ /* muzzle device */
+ if(muz==='suppressor'){ rr(mx,-4.6,26,9.2,4,'#22262f'); ctx.fillStyle=a; ctx.fillRect(mx+22,-4.6,3,9.2); }
+ else if(muz==='brake'||muz==='brakeXL'){ var bw=muz==='brakeXL'?17:12, bh=muz==='brakeXL'?11:8; ctx.fillStyle='#191d26'; ctx.fillRect(mx,-bh/2,bw,bh); ctx.fillStyle='rgba(0,0,0,0.5)'; for(var s3=0;s3<3;s3++)ctx.fillRect(mx+2.5+s3*(bw/3),-bh/2,2,bh); }
+ else if(muz==='crown'){ ctx.fillStyle='#c9a227'; ctx.fillRect(mx,-4.4,9,8.8); ctx.fillStyle='#ffe98a'; ctx.fillRect(mx,-4.4,9,2.4); }
+ else if(muz!=='none'){ ctx.fillStyle='#191d26'; ctx.fillRect(mx,-3,6,6); }
+ /* magazine */
+ if(M.mag==='curved'){ ctx.fillStyle='#191d26'; ctx.beginPath(); ctx.moveTo(-6,6); ctx.quadraticCurveTo(-2,20,4,25); ctx.lineTo(12,22); ctx.quadraticCurveTo(6,16,4,6); ctx.closePath(); ctx.fill(); }
+ else if(M.mag==='bullpup'){ ctx.fillStyle='#191d26'; ctx.fillRect(-58,8,11,15); }
+ else if(M.mag==='cell'){ ctx.globalAlpha=0.55+0.35*Math.sin(now/200); rr(-8,6,13,14,3,a); ctx.globalAlpha=1; }
+ else { ctx.fillStyle='#191d26'; ctx.fillRect(-6,6,11,15); }
+ /* grip */
+ ctx.fillStyle='#14171f'; ctx.beginPath(); ctx.moveTo(10,6); ctx.lineTo(17,6); ctx.lineTo(14,17); ctx.lineTo(8,16); ctx.closePath(); ctx.fill();
+ /* scope */
+ var scx=M.stock==='bullpup'?-16:-6, scl=M.scope;
+ ctx.fillStyle='#0d1017'; ctx.fillRect(scx-4,-13,5,7); ctx.fillRect(scx+scl-2,-13,5,7);
+ rr(scx,-19,scl,8,3,'#0d1017');
+ ctx.fillStyle='#0d1017'; ctx.fillRect(scx+scl,-17.6,5,5.2);
+ ctx.fillStyle=a; ctx.globalAlpha=s.fx?(0.55+0.45*Math.sin(now/240)):0.85; ctx.fillRect(scx+scl+3.4,-16.8,2.2,3.6); ctx.globalAlpha=1;
+ ctx.fillStyle=a; ctx.fillRect(scx+scl*0.45,-21.4,4.6,2.6);
+ /* royal engraving flourish */
+ if(M.stock==='wood'&&(s.rar==='legendary'||s.rar==='mythic'||s.rar==='epic')){ ctx.strokeStyle='rgba(255,233,138,0.65)'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(-64,8); ctx.quadraticCurveTo(-50,3,-38,8); ctx.stroke(); }
+ /* bipod */
+ if(M.bipod){ ctx.strokeStyle='#14171f'; ctx.lineWidth=2.6; ctx.beginPath(); ctx.moveTo(bx+8,4); ctx.lineTo(bx+2,19); ctx.moveTo(bx+8,4); ctx.lineTo(bx+16,19); ctx.stroke(); }
+ if(s.fx&&!mini)drawRifleFX(s,now,mx);
  ctx.restore();
 }
 function statBar(x,y,w,label,val,max,color){
@@ -377,7 +448,7 @@ function draw(){
   panel(60,192,360,104,'rgba(10,14,24,0.88)',rar(eq.rar).color);
   txt('EQUIPPED · '+rar(eq.rar).name,240,210,10,rar(eq.rar).color,'center');
   txt(eq.name,240,228,17,'#ffffff','center');
-  drawRifle(240,268,eq,1.15);
+  drawRifle(240,268,eq,1.15,now);
   txt('COLLECTION '+ownedCount()+' / '+SNIPERS.length,240,286,10,'#8fa8c8','center');
   addBtn(90,312,300,52,'▶  ENTER ARENA',function(){SFX.click();newRun();screen='game';});
   addBtn(90,376,144,46,'🎁 CASES',function(){SFX.click();screen='cases';});
@@ -429,7 +500,7 @@ function drawArmory(){
   if(cyp+ch<58||cyp>456)continue;
   var owned=!!save.inv[s.id], sel=armSel===s.id, eqp=save.equipped===s.id;
   panel(cxp,cyp,cw,ch,sel?'rgba(24,36,58,0.98)':'rgba(13,18,30,0.95)',eqp?'#2affd5':rar(s.rar).color);
-  if(owned){drawRifle(cxp+cw/2,cyp+52,s,0.62);}
+  if(owned){drawRifle(cxp+cw/2,cyp+52,s,0.62,performance.now());}
   else{txt('?',cxp+cw/2,cyp+46,30,'#3a465e','center');}
   txt(owned?s.name:'··· LOCKED ···',cxp+cw/2,cyp+16,10,owned?'#fff':'#67738c','center');
   txt(rar(s.rar).name+(save.inv[s.id]>1?' ×'+save.inv[s.id]:''),cxp+cw/2,cyp+72,9,rar(s.rar).color,'center');
@@ -480,7 +551,7 @@ function drawOpening(now){
   var idx=Math.floor(el/90)%SNIPERS.length, s=SNIPERS[idx];
   panel(90,150,300,190,'rgba(13,18,30,0.95)',rar(s.rar).color);
   txt(rar(s.rar).name,240,182,13,rar(s.rar).color,'center');
-  drawRifle(240,262,s,1.25);
+  drawRifle(240,262,s,1.25,now);
   txt(s.name,240,308,16,'#fff','center');
   var dots='·'.repeat(1+Math.floor(el/300)%3);
   txt('ROLLING'+dots,240,392,13,'#8fa8c8','center');
@@ -490,7 +561,7 @@ function drawOpening(now){
   txt(res.dupe?'DUPLICATE':'★ NEW SNIPER ★',240,150,15,rc.color,'center');
   txt(rc.name,240,178,13,rc.color,'center');
   txt(it.name,240,204,21,'#fff','center');
-  drawRifle(240,282,it,1.5);
+  drawRifle(240,282,it,1.5,now);
   if(res.dupe)txt('Converted to +'+res.dupeCoins+'⬢',240,330,14,'#ffd23f','center');
   else txt('Added to your ARMORY',240,330,13,'#8dff9a','center');
   if(save.coins>=c.price)addBtn(70,392,160,46,'OPEN ANOTHER',function(){var r2=openCase(c);if(r2){openAnim={t0:performance.now(),c:c,res:r2};SFX.open();}});
@@ -501,85 +572,77 @@ function drawOpening(now){
 function drawGame(now){
  var z=G.zoom, eq=sniperById(save.equipped);
  var shx=(Math.random()*2-1)*G.shake, shy=(Math.random()*2-1)*G.shake;
- /* sky */
- var g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#1b2547');g.addColorStop(0.55,'#4a2a5e');g.addColorStop(1,'#8a4a3a');
- ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
- ctx.fillStyle='#ffb35c';ctx.beginPath();ctx.arc((1150-G.camX*0.2)%(W+160)-80,110,26,0,7);ctx.fill();
- /* far skyline parallax */
- ctx.save();ctx.translate(-(G.camX*0.45)%130,40);ctx.fillStyle='rgba(20,24,44,0.8)';
+ /* ===== PLAY AREA (nothing but the world, scope and crosshair) ===== */
+ ctx.save(); ctx.beginPath(); ctx.rect(0,0,W,GH); ctx.clip();
+ var g=ctx.createLinearGradient(0,0,0,GH); g.addColorStop(0,'#1b2547'); g.addColorStop(0.55,'#4a2a5e'); g.addColorStop(1,'#8a4a3a');
+ ctx.fillStyle=g; ctx.fillRect(0,0,W,GH);
+ ctx.fillStyle='#ffb35c'; ctx.beginPath(); ctx.arc((1150-G.camX*0.2)%(W+160)-80,110,26,0,7); ctx.fill();
+ ctx.save(); ctx.translate(-(G.camX*0.45)%130,40); ctx.fillStyle='rgba(20,24,44,0.8)';
  for(var fx=-130;fx<W+130;fx+=130)ctx.fillRect(fx,120,86,300);
  ctx.restore();
- /* world */
- ctx.save();ctx.scale(z,z);ctx.translate(-G.camX+shx/z,-G.camY+shy/z);
+ ctx.save(); ctx.scale(z,z); ctx.translate(-G.camX+shx/z,-G.camY+shy/z);
  for(var i=0;i<BUILDINGS.length;i++)drawBuilding(BUILDINGS[i]);
- ctx.fillStyle='#232c42';ctx.fillRect(0,470,WORLD_W,WORLD_H-470);
- ctx.fillStyle='#2e3a58';ctx.fillRect(0,470,WORLD_W,6);
+ ctx.fillStyle='#232c42'; ctx.fillRect(0,470,WORLD_W,WORLD_H-470);
+ ctx.fillStyle='#2e3a58'; ctx.fillRect(0,470,WORLD_W,6);
  for(var s2=0;s2<SPOTS.length;s2++)drawSpotProp(SPOTS[s2]);
  for(var e2=0;e2<G.enemies.length;e2++)drawEnemy(G.enemies[e2],now);
- /* enemy lasers (final aim) */
- ctx.strokeStyle='rgba(255,40,40,0.55)';ctx.lineWidth=1.2;
+ ctx.strokeStyle='rgba(255,40,40,0.55)'; ctx.lineWidth=1.2;
  for(var e3=0;e3<G.enemies.length;e3++){var en=G.enemies[e3];
   if(en.state==='aim'&&en.t>en.aim*0.62){ctx.beginPath();
    ctx.moveTo(en.x+(en.x<WORLD_W/2?13:-13),en.y-33);
-   ctx.lineTo(G.camX+viewW()/2, WORLD_H-40);ctx.stroke();}}
+   ctx.lineTo(G.camX+viewW()/2, G.camY+viewH()-14); ctx.stroke();}}
  ctx.restore();
- /* pops */
  for(var p=0;p<G.pops.length;p++){var pp=G.pops[p];
   txt(pp.txt,(pp.x-G.camX)*z,(pp.y-G.camY)*z,15,pp.color,'center');}
- /* scope overlay */
  var cw2=crossWorld(), csx=(cw2.x-G.camX)*z, csy=(cw2.y-G.camY)*z;
  if(z>=2){
-  var R=z>=3?178:158;
+  var R=z>=3?168:150;
   ctx.fillStyle='rgba(2,3,6,0.88)';
-  ctx.beginPath();ctx.rect(0,0,W,H);ctx.arc(W/2,H/2,R,0,7,true);ctx.fill();
-  ctx.strokeStyle=eq.accent;ctx.lineWidth=3;ctx.beginPath();ctx.arc(W/2,H/2,R,0,7);ctx.stroke();
-  ctx.strokeStyle='rgba(0,0,0,0.9)';ctx.lineWidth=5;ctx.beginPath();ctx.arc(W/2,H/2,R+5,0,7);ctx.stroke();
-  txt(z+'x',W/2+R-24,H/2+R-16,12,eq.accent,'center');
+  ctx.beginPath(); ctx.rect(0,0,W,GH); ctx.arc(W/2,GH/2,R,0,7,true); ctx.fill();
+  ctx.strokeStyle=eq.accent; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(W/2,GH/2,R,0,7); ctx.stroke();
+  ctx.strokeStyle='rgba(0,0,0,0.9)'; ctx.lineWidth=5; ctx.beginPath(); ctx.arc(W/2,GH/2,R+5,0,7); ctx.stroke();
+  txt(z+'x',W/2+R-24,GH/2+R-16,12,eq.accent,'center');
  }
- /* crosshair */
  if(!G.ducking){
-  ctx.strokeStyle=eq.accent;ctx.lineWidth=2;
-  ctx.beginPath();ctx.arc(csx,csy,13,0,7);ctx.stroke();
-  ctx.beginPath();ctx.moveTo(csx-22,csy);ctx.lineTo(csx-6,csy);ctx.moveTo(csx+6,csy);ctx.lineTo(csx+22,csy);
-  ctx.moveTo(csx,csy-22);ctx.lineTo(csx,csy-6);ctx.moveTo(csx,csy+6);ctx.lineTo(csx,csy+22);ctx.stroke();
-  ctx.fillStyle='#ff4040';ctx.fillRect(csx-1,csy-1,2,2);
+  ctx.strokeStyle=eq.accent; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.arc(csx,csy,13,0,7); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(csx-22,csy); ctx.lineTo(csx-6,csy); ctx.moveTo(csx+6,csy); ctx.lineTo(csx+22,csy);
+  ctx.moveTo(csx,csy-22); ctx.lineTo(csx,csy-6); ctx.moveTo(csx,csy+6); ctx.lineTo(csx,csy+22); ctx.stroke();
+  ctx.fillStyle='#ff4040'; ctx.fillRect(csx-1,csy-1,2,2);
  }
- /* player rifle */
- var kickY=G.kick*16;
- if(z===1){ctx.save();ctx.translate(0,kickY);drawRifle(300,520,eq,1.35);ctx.restore();}
- else{ctx.fillStyle='rgba(5,6,10,0.9)';ctx.fillRect(0,H-34,W,34);drawRifle(240,536+kickY,eq,0.8);}
- if(G.ducking){panel(150,240,180,44,'rgba(10,20,14,0.9)','#8dff9a');txt('IN COVER',240,262,17,'#8dff9a','center');}
- /* HUD */
- panel(0,0,W,46,'rgba(6,8,14,0.88)',null);
- txt('HP',12,15,11,'#9fb4cc','left');
- panel(38,8,110,13,'#2a1420',null);ctx.fillStyle=G.hp>30?'#3fe07a':'#ff4040';ctx.fillRect(39,9,108*Math.max(0,G.hp)/100,11);
- txt(Math.ceil(G.hp)+'',95,15,10,'#fff','center');
- txt('WAVE '+G.wave,240,14,13,'#fff','center');
+ if(G.flash>0){ctx.fillStyle='rgba(255,30,30,'+(G.flash*0.28)+')';ctx.fillRect(0,0,W,GH);}
+ ctx.restore();
+ /* ===== CONTROL DECK (HUD, rifle showcase, buttons live here) ===== */
+ panel(0,GH,W,H-GH,'#070a12','#22304a');
+ ctx.fillStyle=eq.accent; ctx.fillRect(0,GH,W,2);
+ txt('HP',12,GH+15,11,'#9fb4cc','left');
+ panel(38,GH+8,96,13,'#2a1420',null); ctx.fillStyle=G.hp>30?'#3fe07a':'#ff4040'; ctx.fillRect(39,GH+9,94*Math.max(0,G.hp)/100,11);
+ txt(Math.ceil(G.hp)+'',86,GH+15,10,'#fff','center');
+ txt('WAVE '+G.wave,240,GH+15,13,'#fff','center');
+ txt('SCORE '+G.score,344,GH+15,13,'#ffd23f','right');
  var left=G.waveTotal-G.spawned+G.enemies.filter(function(e){return e.state!=='dead';}).length;
- txt('HOSTILES '+left,240,33,10,'#ff9d9d','center');
- txt('SCORE '+G.score,W-12,15,13,'#ffd23f','right');
- txt('⬢ '+save.coins,W-12,33,10,'#ffd23f','right');
- if(G.streak>=3)txt('🔥 x'+G.streak+' STREAK',70,58,12,'#ffb400','left');
- for(var f=0;f<G.feed.length;f++)txt(G.feed[f].txt,12,76+f*17,11,G.feed[f].color,'left');
- /* controls */
- addBtn(356,452,112,84,'FIRE',function(){fire();},'fire');
- addBtn(12,452,104,84,'DUCK',function(){},'ghost');
- addBtn(368,392,100,44,'ZOOM '+z+'x',function(){cycleZoom();},'ghost');
- addBtn(12,392,86,44,'⏸ EXIT',function(){screen='title';G=null;},'ghost');
+ txt('HOSTILES '+left,12,GH+33,10,'#ff9d9d','left');
+ if(G.streak>=3)txt('🔥 x'+G.streak+' STREAK',150,GH+33,11,'#ffb400','left');
+ txt('⬢ '+save.coins,344,GH+33,11,'#ffd23f','right');
+ if(G.ducking)txt('▣ IN COVER — their shots miss',224,GH+51,11,'#8dff9a','center');
+ else if(G.feed.length)txt(G.feed[0].txt,224,GH+51,10.5,G.feed[0].color,'center');
+ if(G.phase==='intro')txt('— WAVE '+G.wave+' · '+G.waveTotal+' HOSTILES INBOUND —',224,GH+70,12.5,'#2affd5','center');
+ else if(G.phase==='clear')txt('— WAVE CLEAR! +250 BONUS · +20 HP —',224,GH+70,12.5,'#8dff9a','center');
+ else { txt(eq.name,224,GH+66,13,'#ffffff','center'); txt(rar(eq.rar).name,224,GH+82,9,rar(eq.rar).color,'center'); }
+ drawRifle(224,GH+126,eq,1.05,now);
  var boltLeft=G.boltUntil-performance.now();
- if(boltLeft>0){panel(196,548,88,10,'#141a28',null);ctx.fillStyle=eq.accent;ctx.fillRect(197,549,86*(1-boltLeft/eq.bolt),8);}
- if(G.phase==='intro'){panel(90,220,300,74,'rgba(8,11,20,0.92)','#2affd5');
-  txt('WAVE '+G.wave,240,246,24,'#fff','center');txt(G.waveTotal+' hostiles inbound',240,274,12,'#9fd8ff','center');}
- if(G.phase==='clear'){panel(90,220,300,74,'rgba(8,20,12,0.92)','#8dff9a');
-  txt('WAVE CLEAR!',240,246,22,'#8dff9a','center');txt('+250 bonus · +20 HP',240,274,12,'#dfe6ee','center');}
- if(G.flash>0){ctx.fillStyle='rgba(255,30,30,'+(G.flash*0.28)+')';ctx.fillRect(0,0,W,H);}
+ if(boltLeft>0){ panel(168,GH+146,112,8,'#141a28',null); ctx.fillStyle=eq.accent; ctx.fillRect(169,GH+147,110*(1-boltLeft/eq.bolt),6); }
+ addBtn(352,GH+6,116,34,'ZOOM '+z+'x',function(){cycleZoom();},'ghost');
+ addBtn(336,GH+52,120,106,'FIRE',function(){fire();},'fire');
+ addBtn(12,GH+58,100,62,'DUCK',function(){},'ghost');
+ addBtn(12,GH+126,100,32,'⏸ EXIT',function(){screen='title';G=null;},'ghost');
 }
 function cycleZoom(){
  if(!G)return;var eq=sniperById(save.equipped);
  var cxp=G.camX+viewW()/2, cyp=G.camY+viewH()/2;
  G.zoom=G.zoom>=eq.zoom?1:G.zoom+1;
  G.camTX=cxp-viewW()/2;G.camX=G.camTX;
- G.camTY=Math.max(0,Math.min(H-viewH(),cyp-viewH()/2));G.camY=G.camTY;
+ G.camTY=Math.max(0,Math.min(WORLD_H-viewH(),cyp-viewH()/2));G.camY=G.camTY;
  SFX.click();
 }
 function drawOver(){
@@ -653,7 +716,7 @@ requestAnimationFrame(loop);
 
 /* debug/test hooks */
 window.__sa={get screen(){return screen;},set screen(v){screen=v;},
- get G(){return G;},save:save,SNIPERS:SNIPERS,CASES:CASES,
+ get G(){return G;},save:save,SNIPERS:SNIPERS,CASES:CASES,MODELS:MODELS,
  newRun:newRun,fire:fire,openCase:openCase,spawnEnemy:spawnEnemy,
  sniperById:sniperById,ownedCount:ownedCount};
 </script>
