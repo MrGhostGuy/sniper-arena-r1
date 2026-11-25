@@ -668,7 +668,8 @@ cv.addEventListener('pointerdown',function(e){
  for(var i=buttons.length-1;i>=0;i--){var b=buttons[i];
   if(p.x>=b.x&&p.x<=b.x+b.w&&p.y>=b.y&&p.y<=b.y+b.h){
    if(b.label==='DUCK'&&screen==='game'){G.ducking=true;drag={duck:true};return;}
-   if(b.style!=='cell')b.cb(); return;}}
+   if(b.style==='cell'){drag={x:p.x,y:p.y,scroll:armScroll,moved:0,t:performance.now(),cell:b};return;}
+   b.cb(); return;}}
  if(screen==='game'&&G){drag={x:p.x,y:p.y,camTX:G.camTX,camTY:G.camTY,moved:0,t:performance.now()};}
  else if(screen==='armory'){drag={x:p.x,y:p.y,scroll:armScroll,moved:0,t:performance.now()};}
 });
@@ -681,6 +682,7 @@ cv.addEventListener('pointermove',function(e){
 });
 function endPointer(e){
  if(drag&&drag.duck&&G)G.ducking=false;
+ if(drag&&drag.cell&&drag.moved<8)drag.cell.cb();
  if(drag&&screen==='game'&&G&&drag.moved<8&&performance.now()-drag.t<300&&!drag.duck)fire();
  drag=null;
 }
