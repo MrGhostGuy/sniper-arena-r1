@@ -1,30 +1,24 @@
-# Sniper Arena — R1 Edition
+# Sniper Arena R1
 
-A compact, native-feeling sniper game built for the Rabbit R1's 240×282 creation-code screen. Inspired by the Roblox game **Sniper Arena**, with authentic rifle names, case series, rarity tiers, and a deep cosmetic collection — including rare EXOTIC finishes.
+An original fan-tribute arena sniping game built for the Rabbit R1 (240×282).
+All art, item names and code are original to this creation.
 
 ## Play
+- **Scope-duel AI snipers** across a rooftop arena — watch for the scope glint,
+  beat them to the shot, duck into cover when the laser locks on.
+- **Waves** that get faster and meaner; kills, headshots and streaks pay coins.
+- **Cases**: Standard (100⬢), Elite (300⬢) and Phantom (800⬢). Every case drops
+  one sniper; duplicates convert back into coins automatically.
+- **36 rifles, 6 rarity tiers** — Common, Rare, Epic, Legendary, Mythic, Phantom.
+  Rarer rifles cycle their bolt faster, zoom deeper, sway less and pan quicker.
+- **Armory**: browse the full collection, compare stats, equip your best rifle.
+- Progress (coins, collection, best score) saves on-device in localStorage.
 
-- **Scroll wheel / arrow keys / R1 scroll** — switch aiming lane (1–4)
-- **Side button / Enter / click** — fire
-- **Long press / Esc / Backspace** — back
-- **M** — mute
+## Controls
+- Drag to look · scroll wheel pans · ZOOM button or `Z` cycles scope
+- FIRE button, tap the scope, side button, or `Space` to shoot
+- Hold DUCK (or `↓`) to take cover — their shots miss, but you can't fire
 
-## Systems
-
-- **8 rifles** to unlock with Gold: SSG08 → AWP → M82A1 → M200 → Kar98k → WA 2000 → NTW 20 → DSR-1. Higher tiers give wider hit windows, less sway, faster reloads, and higher Credit payouts.
-- **90-second matches** against 3 randomly selected AI opponent archetypes (TWITCH, CAMP, MARK, GHOST, RUSH). Enemies move across 4 lanes, occasionally peek from cover, and shoot back.
-- **3 currencies**: Credits (cases), Gold (rifles), CASH (market sales).
-- **7 cases**: Strike, Release, Dream, Secret, Lumen, Neon Core, Easter — with the real case series names and boosted rare odds on limited cases.
-- **30 cosmetics** across 6 rarities: Common, Rare, Epic, Legendary, Mystic, and **Exotic**. Each has its own animated procedural finish (gradient, stripe, glow, flame, starfield, rainbow, RGB).
-- **Market** to sell skins for CASH, **career stats**, and a **daily 10-headshot bonus** (+500 Credits).
-- Saves locally in `localStorage`.
-
-## Design notes
-
-Everything is rendered on a single `<canvas>` with no dependencies. The game listens for the R1's native `scrollUp`, `scrollDown`, `sideClick`, and `longPressStart` events, with desktop fallbacks.
-
-## Deployment
-
-Static site — `index.html`, `style.css`, `app.js`, `icon.png`, `.nojekyll`, and `.github/workflows/pages.yml`. Pushes to `main` deploy via GitHub Pages Actions.
-
-Live: https://mrghostguy.github.io/sniper-arena-r1/
+## Install on R1
+Creations card → create tab → **add via QR code** → scan the creation code.
+Payload: title `Sniper Arena R1`, theme `#2AFFD5`, this repo's GitHub Pages URL.
