@@ -3,22 +3,32 @@
 An original arena sniping game built for the Rabbit R1 (240×282), by **Jeff H. (MrGhost)**.
 All art, item names and code are original to this creation.
 
-**Version 5.0** — rarity ladder rebuilt: LEGENDARY is now the top tier, Phantom is
-renamed ULTRA, Ultra rifles gain their own projectiles, Legendaries are buffed,
-and Epic/Mythic rifles fire unique tracers.
-(4.1 added the case-opening overhaul + starter chests; 4.0 added COD-style matches.)
+**Version 6.0** — pregame lobby with map voting, 2 new maps (Neon Spire, Back
+Alley), TDM removed, FFA is a race to 30 kills, FLAG HUNT ranked by flag points,
+a saved player callsign, and a fanfare winner screen.
+(5.0 rebuilt the rarity ladder: LEGENDARY on top, ULTRA below it, unique tracers.)
 
 ## The Match (3:00, respawns)
-- **FREE-FOR-ALL** — every sniper for themselves; most points wins.
-- **TEAM DEATHMATCH** — you + 3 AI allies vs 4 rivals; most team kills wins.
+- **Set your callsign** in the name box on the title screen — it is saved, shown
+  on the scoreboard, and announced if you win.
+- **PREGAME LOBBY** — before every match you see all 6 players and their loadouts,
+  and vote between 2 maps. Bots vote too; most votes wins the map.
+- **FREE-FOR-ALL** — every sniper for themselves. First to **30 kills** wins
+  instantly, or the most kills when the buzzer hits.
 - **FLAG HUNT** — one flag; kill the carrier to take it. Only the carrier scores
-  (+10/s). Most points at the buzzer wins.
+  flag points (+10/s). Winner = most **flag points**; everyone's kills are still
+  shown on the final board.
+- **Winner screen** — every match ends with the winner's name announced with
+  fanfare, confetti and rotating rays before the results board.
 - **Death screen** shows who killed you, the sniper they used, and the live
   scoreboard — then hit RESPAWN. Your best run of the match replays as the
   **BEST PLAY** at the end.
 - **Medals** pop for kill chains (DOUBLE KILL, TRIPLE KILL, MULTI-KILL…) and
   streaks: 5 BLOODTHIRSTY · 10 MERCILESS · 15 RELENTLESS · 20 BRUTAL · 25 NUCLEAR.
-- **3 rotating maps**, a new one each match: Downtown Rooftops, Neon Docks, Dust Canyon.
+- **5 maps**, voted in the lobby: Downtown Rooftops, Neon Docks, Dust Canyon,
+  **Neon Spire** (futuristic neon towers, holo-billboards, hover pods) and
+  **Back Alley** (brick walls, fire escapes — enemies hide behind and *inside*
+  dumpsters and oil-barrel clusters).
 
 ## Combat
 - **Damage model**: headshots always kill. Body shots deal your rifle's DMG
