@@ -7,8 +7,8 @@
 <style>
   html,body{margin:0;padding:0;background:#05060a;height:100%;overflow:hidden}
   body{display:flex;align-items:center;justify-content:center;font-family:Verdana,Geneva,sans-serif;-webkit-user-select:none;user-select:none}
-  #wrap{position:relative;line-height:0;container-type:inline-size}
-  #nameBox{position:absolute;left:12.5%;top:49.29%;width:75%;height:6.74%;display:none;background:transparent;border:none;outline:none;color:#fff;text-align:center;font-family:Verdana,Geneva,sans-serif;font-weight:bold;letter-spacing:2px;text-transform:uppercase;font-size:15px;font-size:4cqw;z-index:5}
+  #wrap{position:relative;line-height:0}
+  #nameBox{position:absolute;left:12.5%;top:49.29%;width:65%;height:6.74%;display:none;background:transparent;border:none;outline:none;color:#fff;text-align:center;font-family:Verdana,Geneva,sans-serif;font-weight:bold;letter-spacing:2px;text-transform:uppercase;font-size:16px;line-height:1.25;z-index:5;pointer-events:auto;-webkit-user-select:text;user-select:text;caret-color:#ffd23f}
   #nameBox::placeholder{color:#5f7191;letter-spacing:1px}
   canvas{width:min(100vw,85.1vh);height:auto;display:block;touch-action:none;background:#0a0d18;border-radius:6px}
 </style>
@@ -1095,13 +1095,14 @@ function draw(){
   txt('COLLECTION '+ownedCount()+' / '+SNIPERS.length+'  ·  KILL FX: '+killFxById(save.killFx).name.toUpperCase(),240,264,10,'#8fa8c8','center');
   panel(60,278,360,38,'rgba(10,14,24,0.88)','#ffb400');
   txt('✏️',74,297,13,'#ffd23f','left');
+  addBtn(378,283,38,30,'ABC',function(){openPicker();},'ghost');
   addBtn(90,324,300,52,'▶  ENTER ARENA',function(){SFX.click();screen='modes';});
   addBtn(90,384,144,44,'🎁 CASES',function(){SFX.click();screen='cases';});
   addBtn(246,384,144,44,'🔫 ARMORY',function(){SFX.click();armSel=save.equipped;screen='armory';});
   addBtn(90,436,300,38,'HOW TO PLAY',function(){SFX.click();screen='howto';},'ghost');
   addBtn(90,482,300,32,save.mute?'🔇 SOUND: OFF':'🔊 SOUND: ON',function(){save.mute=!save.mute;persist();},'ghost');
   txt('Drag or scroll to aim · one shot, one kill',240,530,10,'#5f7191','center');
-  txt('Created by Jeff H. (MrGhost) · v6.0',240,550,10,'#8fa8c8','center');
+  txt('Created by Jeff H. (MrGhost) · v6.1',240,550,10,'#8fa8c8','center');
  }
  else if(screen==='howto'){
   skyBG('#0d1322','#0d1322');header('HOW TO PLAY');
@@ -1133,6 +1134,7 @@ function draw(){
  else if(screen==='opening')drawOpening(now);
  else if(screen==='modes')drawModes();
  else if(screen==='lobby')drawLobby(now);
+ else if(screen==='namepick')drawNamePick();
  else if(screen==='winner')drawWinner(now);
  else if(screen==='bestplay')drawBestPlay(now);
  else if(screen==='game')drawGame(now);
@@ -1524,6 +1526,27 @@ function drawWinner(now){
   ctx.save();ctx.translate(xx,yy);ctx.rotate(el*p.rs+p.ph);ctx.fillStyle=p.c;ctx.fillRect(-p.sz/2,-p.sz/4,p.sz,p.sz/2);ctx.restore();}
  addBtn(140,478,200,46,'CONTINUE ⏩',function(){proceedWin();});
 }
+var pickName='';
+function openPicker(){pickName=(save.name||'').toUpperCase();screen='namepick';SFX.click();}
+function pickChar(c){
+ if(c==='DONE'){save.name=pickName;persist();screen='title';SFX.open();return;}
+ if(c==='CLR'){pickName='';SFX.click();return;}
+ if(c==='⌫'){pickName=pickName.slice(0,-1);SFX.click();return;}
+ if(pickName.length<14){pickName+=c;SFX.click();}
+}
+function drawNamePick(){
+ skyBG('#0b0f1e','#170f2c');header('SET YOUR CALLSIGN');
+ panel(40,84,400,54,'rgba(13,18,30,0.97)','#ffb400');
+ txt(pickName||'—',240,111,22,'#ffd23f','center');
+ txt('TAP LETTERS · 14 MAX · SAVED WHEN YOU TAP DONE',240,152,10,'#8fa8c8','center');
+ var chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_';
+ for(var i=0;i<chars.length;i++){var cx=40+(i%7)*58, cy=168+Math.floor(i/7)*50;
+  (function(ch,xx,yy){addBtn(xx,yy,52,44,ch,function(){pickChar(ch);},'ghost');})(chars[i],cx,cy);}
+ addBtn(40,486,120,44,'⌫ DELETE',function(){pickChar('⌫');},'ghost');
+ addBtn(170,486,120,44,'CLEAR',function(){pickChar('CLR');},'ghost');
+ addBtn(300,486,140,44,'✓ DONE',function(){pickChar('DONE');});
+ addBtn(165,538,150,22,'✕ CANCEL',function(){SFX.click();screen='title';},'ghost');
+}
 function drawBestPlay(now){
  if(!G||!G.bestSeg){screen='over';return;}
  var seg=G.bestSeg, frames=seg.frames;
@@ -1762,8 +1785,11 @@ function drawOver(){
 var nameBoxEl=document.getElementById('nameBox');
 if(nameBoxEl){var syncName=function(){save.name=nameBoxEl.value.replace(/[<>&"']/g,'').slice(0,14);persist();};
  nameBoxEl.addEventListener('input',syncName);nameBoxEl.addEventListener('change',syncName);}
-function syncNameBox(){if(!nameBoxEl)return;nameBoxEl.style.display=(screen==='title')?'block':'none';
- if(document.activeElement!==nameBoxEl&&nameBoxEl.value!==(save.name||''))nameBoxEl.value=save.name||'';}
+var lastScreen='';
+function syncNameBox(){if(!nameBoxEl)return;
+ nameBoxEl.style.display=(screen==='title')?'block':'none';
+ if(screen==='title'&&lastScreen!=='title'&&document.activeElement!==nameBoxEl)nameBoxEl.value=save.name||'';
+ lastScreen=screen;}
 var drag=null;
 function evtPos(e){var r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)*W/r.width,y:(e.clientY-r.top)*H/r.height};}
 cv.addEventListener('pointerdown',function(e){
@@ -1824,7 +1850,7 @@ requestAnimationFrame(loop);
 window.__sa={get screen(){return screen;},set screen(v){screen=v;},
  get G(){return G;},save:save,SNIPERS:SNIPERS,RARITIES:RARITIES,CASES:CASES,MODELS:MODELS,
  newRun:newRun,fire:fire,openCase:openCase,startOpening:startOpening,buildStrip:buildStrip,tracerOf:tracerOf,TRACERS:TRACERS,spawnEnemy:spawnEnemy,KILLFX:KILLFX,killFxById:killFxById,MAPS:MAPS,curMap:curMap,nextWave:nextWave,
- sniperById:sniperById,ownedCount:ownedCount,damageEnemy:damageEnemy,killEnemy:killEnemy,resolveShot:resolveShot,PROJ:PROJ,projOf:projOf,medal:medal,startReload:startReload,MODES:MODES,endMatch:endMatch,playerDie:playerDie,respawnPlayer:respawnPlayer,ambientEvent:ambientEvent,spawnAlly:spawnAlly,teamKills:teamKills,sortedBoard:sortedBoard,startLobby:startLobby,startMatch:startMatch,matchWinner:matchWinner,playerName:playerName,proceedWin:proceedWin,lobbyState:function(){return lobby;}};
+ sniperById:sniperById,ownedCount:ownedCount,damageEnemy:damageEnemy,killEnemy:killEnemy,resolveShot:resolveShot,PROJ:PROJ,projOf:projOf,medal:medal,startReload:startReload,MODES:MODES,endMatch:endMatch,playerDie:playerDie,respawnPlayer:respawnPlayer,ambientEvent:ambientEvent,spawnAlly:spawnAlly,teamKills:teamKills,sortedBoard:sortedBoard,startLobby:startLobby,startMatch:startMatch,matchWinner:matchWinner,playerName:playerName,proceedWin:proceedWin,lobbyState:function(){return lobby;},openPicker:openPicker,pickChar:pickChar,getPick:function(){return pickName;}};
 </script>
 </body>
 </html>

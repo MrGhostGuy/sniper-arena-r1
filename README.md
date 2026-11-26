@@ -3,6 +3,7 @@
 An original arena sniping game built for the Rabbit R1 (240×282), by **Jeff H. (MrGhost)**.
 All art, item names and code are original to this creation.
 
+**Version 6.1** — callsign entry fixed (sturdier name box + a built-in letter picker on the title screen, tap ABC).
 **Version 6.0** — pregame lobby with map voting, 2 new maps (Neon Spire, Back
 Alley), TDM removed, FFA is a race to 30 kills, FLAG HUNT ranked by flag points,
 a saved player callsign, and a fanfare winner screen.
