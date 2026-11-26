@@ -1028,7 +1028,7 @@ function drawArmory(){
  if(pj2){var bl='★ '+pj2.name+': ';
   txt(bl,16,486,10,'#ffb400','left');
   txt(pj2.bonus,16+ctx.measureText(bl).width+2,486,9.5,'#cfe8ff','left');
-  txt(info,464,486,9,'#8fa8c8','right');}
+  txt('DMG '+s2.dmg+' · MAG '+s2.mag+' · ADS '+s2.ads+'ms',464,486,9,'#8fa8c8','right');}
  else txt(info,16,486,9.5,'#8fa8c8','left');
  statBar(16,502,150,'BOLT', (800-s2.bolt)/430*100,100,'#ffb400');
  statBar(250,502,150,'PAN', (s2.pan-0.9)/0.7*100,100,'#3fa9f5');
