@@ -29,9 +29,9 @@ var RARITIES=[
  {id:'common',   name:'COMMON',    color:'#b8c0cc'},
  {id:'rare',     name:'RARE',      color:'#3fa9f5'},
  {id:'epic',     name:'EPIC',      color:'#b45cff'},
- {id:'legendary',name:'LEGENDARY', color:'#ffb400'},
  {id:'mythic',   name:'MYTHIC',    color:'#ff3b5c'},
- {id:'phantom',  name:'PHANTOM',   color:'#2affd5'}
+ {id:'ultra',    name:'ULTRA',     color:'#2affd5'},
+ {id:'legendary',name:'LEGENDARY', color:'#ffb400'}
 ];
 function rar(id){for(var i=0;i<RARITIES.length;i++)if(RARITIES[i].id===id)return RARITIES[i];return RARITIES[0];}
 /* bolt=ms between shots, zoom=max scope level, sway=drift px (lower better), pan=camera speed x */
@@ -62,27 +62,28 @@ var SNIPERS=[
  {id:'sr_tempest',name:'Tempest Glass',      rar:'epic',     bolt:595, zoom:3, sway:4,  pan:1.20, body:'#274b63', accent:'#7fe7ff', m:'tactical', fx:'pulse'},
  {id:'sr_venom',  name:'Venom Garden',       rar:'epic',     bolt:580, zoom:3, sway:5,  pan:1.18, body:'#2f521f', accent:'#a6ff3f', m:'dmr', fx:'pulse'},
  {id:'sr_mirage', name:'Mirage Saint',       rar:'epic',     bolt:575, zoom:3, sway:4,  pan:1.20, body:'#6b5636', accent:'#ffe9a8', m:'royal', fx:'pulse'},
- /* LEGENDARY — named animated effects */
- {id:'sr_suncrown',name:'Suncrown Regent',  rar:'legendary',bolt:520, zoom:3, sway:3,  pan:1.25, body:'#6e5310', accent:'#ffb400', m:'royal', fx:'gold'},
- {id:'sr_kraken', name:'Kraken Depth',       rar:'legendary',bolt:530, zoom:3, sway:3,  pan:1.22, body:'#0f3a4d', accent:'#19c2ff', m:'antimag', fx:'frost'},
- {id:'sr_widow',  name:'Widow Waltz',        rar:'legendary',bolt:510, zoom:3, sway:3,  pan:1.28, body:'#191922', accent:'#e8e8f2', m:'bullpup', mz:'supp', fx:'void'},
- {id:'sr_inferno',name:'Inferno Parade',    rar:'legendary',bolt:540, zoom:3, sway:4,  pan:1.24, body:'#5e1f10', accent:'#ff6a00', m:'dmr', fx:'ember'},
- {id:'sr_aurora', name:'Aurora Veil',        rar:'legendary',bolt:515, zoom:3, sway:3,  pan:1.27, body:'#173d33', accent:'#5fffc9', m:'tactical', fx:'arc'},
- {id:'sr_monarch',name:'Monarch Decree',     rar:'legendary',bolt:505, zoom:3, sway:3,  pan:1.30, body:'#40305e', accent:'#ffb400', m:'royal', fx:'gold'},
  /* MYTHIC */
- {id:'sr_gravebell',name:'Gravebell Toll',  rar:'mythic',   bolt:460, zoom:3, sway:2,  pan:1.35, body:'#1d1d26', accent:'#ff3b5c', m:'bone', fx:'void'},
- {id:'sr_stormgod', name:'Stormgod Oath',   rar:'mythic',   bolt:450, zoom:3, sway:2,  pan:1.38, body:'#14273d', accent:'#59b7ff', m:'rail', fx:'arc'},
- {id:'sr_bonecourt',name:'Bonecourt Judge', rar:'mythic',   bolt:455, zoom:3, sway:2,  pan:1.36, body:'#3a3a42', accent:'#f2f2f2', m:'bone', fx:'frost'},
- {id:'sr_emberthrone',name:'Emberthrone',   rar:'mythic',   bolt:445, zoom:3, sway:2,  pan:1.40, body:'#40160c', accent:'#ff8c1a', m:'royal', fx:'ember'},
- /* PHANTOM — holographic rail platforms */
- {id:'sr_phantomzero',name:'Phantom Zero',  rar:'phantom',  bolt:390, zoom:3, sway:1,  pan:1.50, body:'#0b2b26', accent:'#2affd5', m:'rail', fx:'holo'},
- {id:'sr_lastlight', name:'Last Light',      rar:'phantom',  bolt:380, zoom:3, sway:1,  pan:1.52, body:'#26262e', accent:'#2affd5', m:'rail', fx:'holo'},
- {id:'sr_ghostlegacy',name:'GHOST LEGACY',   rar:'phantom',  bolt:370, zoom:3, sway:1,  pan:1.55, body:'#101018', accent:'#2affd5', m:'rail', fx:'holo'}
+ {id:'sr_gravebell',name:'Gravebell Toll',  rar:'mythic',   bolt:535, zoom:3, sway:3,  pan:1.24, body:'#1d1d26', accent:'#ff3b5c', m:'bone', fx:'void'},
+ {id:'sr_stormgod', name:'Stormgod Oath',   rar:'mythic',   bolt:520, zoom:3, sway:3,  pan:1.28, body:'#14273d', accent:'#59b7ff', m:'rail', fx:'arc'},
+ {id:'sr_bonecourt',name:'Bonecourt Judge', rar:'mythic',   bolt:528, zoom:3, sway:3,  pan:1.26, body:'#3a3a42', accent:'#f2f2f2', m:'bone', fx:'frost'},
+ {id:'sr_emberthrone',name:'Emberthrone',   rar:'mythic',   bolt:515, zoom:3, sway:3,  pan:1.3, body:'#40160c', accent:'#ff8c1a', m:'royal', fx:'ember'},
+ /* ULTRA — holographic rail platforms */
+ {id:'sr_phantomzero',name:'Phantom Zero',  rar:'ultra',  bolt:458, zoom:3, sway:2,  pan:1.36, body:'#0b2b26', accent:'#2affd5', m:'rail', fx:'holo'},
+ {id:'sr_lastlight', name:'Last Light',      rar:'ultra',  bolt:452, zoom:3, sway:2,  pan:1.39, body:'#26262e', accent:'#2affd5', m:'rail', fx:'holo'},
+ {id:'sr_ghostlegacy',name:'GHOST LEGACY',   rar:'ultra',  bolt:445, zoom:3, sway:2,  pan:1.42, body:'#101018', accent:'#2affd5', m:'rail', fx:'holo'},
+ /* LEGENDARY — named animated effects · TOP TIER */
+ {id:'sr_suncrown',name:'Suncrown Regent',  rar:'legendary',bolt:385, zoom:3, sway:1,  pan:1.48, body:'#6e5310', accent:'#ffb400', m:'royal', fx:'gold'},
+ {id:'sr_kraken', name:'Kraken Depth',       rar:'legendary',bolt:388, zoom:3, sway:1,  pan:1.46, body:'#0f3a4d', accent:'#19c2ff', m:'antimag', fx:'frost'},
+ {id:'sr_widow',  name:'Widow Waltz',        rar:'legendary',bolt:375, zoom:3, sway:1,  pan:1.52, body:'#191922', accent:'#e8e8f2', m:'bullpup', mz:'supp', fx:'void'},
+ {id:'sr_inferno',name:'Inferno Parade',    rar:'legendary',bolt:392, zoom:3, sway:1,  pan:1.47, body:'#5e1f10', accent:'#ff6a00', m:'dmr', fx:'ember'},
+ {id:'sr_aurora', name:'Aurora Veil',        rar:'legendary',bolt:380, zoom:3, sway:1,  pan:1.5, body:'#173d33', accent:'#5fffc9', m:'tactical', fx:'arc'},
+ {id:'sr_monarch',name:'Monarch Decree',     rar:'legendary',bolt:370, zoom:3, sway:1,  pan:1.55, body:'#40305e', accent:'#ffb400', m:'royal', fx:'gold'},
+
 ];
 /* v4.0 — damage / magazine / ADS / fire-mode by rarity + overrides */
-var RAR_DMG={common:68,rare:78,epic:88,legendary:100,mythic:100,phantom:100};
-var RAR_MAG={common:5,rare:5,epic:6,legendary:6,mythic:6,phantom:8};
-var RAR_ADS={common:280,rare:250,epic:220,legendary:200,mythic:180,phantom:150};
+var RAR_DMG={common:68,rare:78,epic:88,mythic:96,ultra:100,legendary:100};
+var RAR_MAG={common:5,rare:5,epic:6,mythic:6,ultra:6,legendary:8};
+var RAR_ADS={common:280,rare:250,epic:220,mythic:200,ultra:180,legendary:150};
 var RIFLE_OVR={
  sr_jackal:{dmg:100}, sr_kraken:{dmg:100},
  sr_tide:{semi:true,bolt:250,dmg:55,mag:8,ads:200},
@@ -93,13 +94,21 @@ for(var si=0;si<SNIPERS.length;si++){var sr0=SNIPERS[si];
  sr0.reload=1100+sr0.mag*160;}
 /* Legendary projectile identities + their unique bonuses (listed in the Armory) */
 var PROJ={
- sr_suncrown:{type:'beam',    name:'SOLAR LANCE',    bonus:'Pierces: hits a 2nd enemy in line'},
- sr_inferno:{type:'flame',    name:'IMMOLATION',     bonus:'Ignites: burn DoT + fiery explosion'},
- sr_aurora:{type:'electric',  name:'CHAIN LIGHTNING',bonus:'Arcs to nearest enemy at 50% dmg'},
- sr_kraken:{type:'frost',     name:'DEEP FREEZE',    bonus:'Chills: aim slowed 40% · shatter kills'},
- sr_widow:{type:'void',       name:'EVENT HORIZON',  bonus:'Kills implode: 40 dmg nearby'},
- sr_monarch:{type:'gold',     name:'GILDED ROUNDS',  bonus:'Kills pay +50% coins'}};
+ sr_suncrown:{type:'beam',    name:'SOLAR LANCE',    bonus:'Pierces: hits EVERY enemy in line'},
+ sr_inferno:{type:'flame',    name:'IMMOLATION',     bonus:'Ignites: heavy burn + fiery explosion'},
+ sr_aurora:{type:'electric',  name:'CHAIN LIGHTNING',bonus:'Arcs to 2 enemies: 50% then 25% dmg'},
+ sr_kraken:{type:'frost',     name:'DEEP FREEZE',    bonus:'Chills: aim slowed 55% · shatter kills'},
+ sr_widow:{type:'void',       name:'EVENT HORIZON',  bonus:'Kills implode: 65 dmg nearby'},
+ sr_monarch:{type:'gold',     name:'GILDED ROUNDS',  bonus:'Kills pay +100% coins'},
+ sr_ghostlegacy:{type:'spectre',name:'SPECTRE',      bonus:'Phase rounds: hits enemies through cover'},
+ sr_phantomzero:{type:'rail',  name:'ZERO POINT',    bonus:'Rail spike: +25% dmg — body shots kill'},
+ sr_lastlight:{type:'flare',   name:'LAST LIGHT',    bonus:'Flare: blinds nearby enemies, aim reset'}};
 function projOf(s){return s?PROJ[s.id]||null:null;}
+var TRACERS={pulse:'PULSE TRACER',tr_ember:'EMBER TRACER',tr_frost:'FROST TRACER',tr_arc:'ARC TRACER',tr_void:'VOID TRACER'};
+function tracerOf(s){var pj=projOf(s);if(pj)return pj.type;
+ if(s.rar==='epic')return 'pulse';
+ if(s.rar==='mythic')return s.fx==='ember'?'tr_ember':s.fx==='frost'?'tr_frost':s.fx==='arc'?'tr_arc':'tr_void';
+ return 'std';}
 /* Distinct rifle models — silhouette, barrel, scope, magazine, muzzle all differ */
 var MODELS={
  classic:{stock:'wood',    barrel:64, bore:3,   scope:22, mag:'box',    muzzle:'plain'},
@@ -124,8 +133,8 @@ var KILLFX=[
  {id:'kf_gold',  name:'Golden Nova',    rar:'legendary',kind:'nova',   color:'#ffb400', desc:'A radiant golden detonation.'},
  {id:'kf_souls', name:'Soul Reaper',    rar:'mythic',   kind:'souls',  color:'#b45cff', desc:'Their ghosts drift up and away.'},
  {id:'kf_meteor',name:'Meteor Slam',    rar:'mythic',   kind:'meteor', color:'#ff6a00', desc:'A meteor streaks down onto the spot.'},
- {id:'kf_void',  name:'Void Implosion', rar:'phantom',  kind:'void',   color:'#9d6bff', desc:'Reality collapses in, then blows out.'},
- {id:'kf_tear',  name:'Reality Tear',   rar:'phantom',  kind:'glitch', color:'#2affd5', desc:'The world glitches where they stood.'}
+ {id:'kf_void',  name:'Void Implosion', rar:'ultra',  kind:'void',   color:'#9d6bff', desc:'Reality collapses in, then blows out.'},
+ {id:'kf_tear',  name:'Reality Tear',   rar:'ultra',  kind:'glitch', color:'#2affd5', desc:'The world glitches where they stood.'}
 ];
 function killFxById(id){for(var i=0;i<KILLFX.length;i++)if(KILLFX[i].id===id)return KILLFX[i];return KILLFX[0];}
 function fxOwnedCount(){var n=0;for(var k in save.fxInv)if(save.fxInv[k]>0)n++;return n;}
@@ -201,17 +210,17 @@ function drawKillFX(x,y,f,age){
 }
 function spawnKillFX(x,y){var f=killFxById(save.killFx);if(f&&G)G.bursts.push({x:x,y:y,t:750,dur:750,fx:f});}
 function sniperById(id){for(var i=0;i<SNIPERS.length;i++)if(SNIPERS[i].id===id)return SNIPERS[i];return SNIPERS[0];}
-var DUPE_COINS={common:15,rare:40,epic:120,legendary:350,mythic:900,phantom:2500};
+var DUPE_COINS={common:15,rare:40,epic:120,mythic:350,ultra:900,legendary:2500};
 /* odds are weights per rarity inside each case */
 var CASES=[
  {id:'case_std', name:'STANDARD CASE', price:100, color:'#3fa9f5',
-  odds:{common:62,rare:26,epic:9,legendary:2.4,mythic:0.5,phantom:0.1}},
+  odds:{common:62,rare:26,epic:9,mythic:2.4,ultra:0.5,legendary:0.1}},
  {id:'case_elt', name:'ELITE CASE', price:300, color:'#b45cff',
-  odds:{common:30,rare:38,epic:22,legendary:8,mythic:1.7,phantom:0.3}},
- {id:'case_phn', name:'PHANTOM CASE', price:800, color:'#2affd5',
-  odds:{common:0,rare:30,epic:36,legendary:24,mythic:8,phantom:2}},
+  odds:{common:30,rare:38,epic:22,mythic:8,ultra:1.7,legendary:0.3}},
+ {id:'case_phn', name:'ULTRA CASE', price:800, color:'#2affd5',
+  odds:{common:0,rare:30,epic:36,mythic:24,ultra:8,legendary:2}},
  {id:'case_fx', name:'KILL FX CHEST', price:250, color:'#ffb400', fxOnly:true,
-  odds:{common:40,rare:30,epic:17,legendary:9,mythic:3,phantom:1}}
+  odds:{common:40,rare:30,epic:17,mythic:9,ultra:3,legendary:1}}
 ];
 var BOTS=['VIPER-9','GHOSTLINE','DEADEYE DAN','LONGSHOT LU','MIRA.EXE','COBALT KID','JACKAL-7','NOCTURNE','HAVOC-2','SABLE','ONE MORE','PIERRE P','DUCHESS','TALLBOY','ZERO COOL','MADAME X'];
 
@@ -290,6 +299,9 @@ SFX.shotFor=function(t){
  else if(t==='void'){thump(320,38,0.32,0.42);ping(196,0.3,0.07);}
  else if(t==='frost'){ping(2350,0.16,0.12);ping(3180,0.12,0.08,0.02);crack(4200,0.03,0.1);}
  else if(t==='gold'){beep(1560,0.05,'triangle',0.1);beep(2093,0.07,'triangle',0.09,0.04);noiseBurst(0.12,0.3);}
+ else if(t==='spectre'){zapSweep(950,140,0.24,0.13);ping(392,0.35,0.06,0.02);}
+ else if(t==='rail'){crack(3400,0.05,0.3);thump(190,60,0.16,0.32);ping(1244,0.1,0.06,0.03);}
+ else if(t==='flare'){beep(1500,0.06,'triangle',0.1);ping(2637,0.25,0.08,0.02);noiseBurst(0.08,0.12);}
  else SFX.shot();};
 SFX.reload=function(){beep(300,0.05,'square',0.06);beep(210,0.05,'square',0.06,0.12);beep(520,0.06,'square',0.07,0.3);};
 SFX.boom=function(){thump(95,30,0.42,0.6);noiseBurst(0.32,0.32);};
@@ -332,7 +344,7 @@ function sortedBoard(){return G.board.map(function(b,i){return{b:b,i:i};}).sort(
 function buildBoard(mode){
  var names=BOTS.slice();
  for(var i=names.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=names[i];names[i]=names[j];names[j]=t;}
- function botGun(){var pool=SNIPERS.filter(function(s){return RARITIES.indexOf(rar(s.rar))<=3;});return pool[Math.floor(Math.random()*pool.length)];}
+ function botGun(){var pool=SNIPERS.filter(function(s){return RARITIES.indexOf(rar(s.rar))<=4;});return pool[Math.floor(Math.random()*pool.length)];}
  G.board=[{name:'YOU',team:mode==='tdm'?'A':'F',kills:0,deaths:0,score:0,gun:sniperById(save.equipped),you:true,active:false,respawnAt:0}];
  var defs= mode==='tdm' ? ['A','A','A','B','B','B','B'] : ['F','F','F','F','F'];
  for(var k=0;k<defs.length;k++)G.board.push({name:names[k],team:defs[k],kills:0,deaths:0,score:0,gun:botGun(),you:false,active:false,respawnAt:0,color:BOT_COLORS[k%BOT_COLORS.length]});
@@ -457,7 +469,7 @@ function spawnEnemy(){
  var aimBase=2650-1150*(1-G.timeLeft/180000);
  G.enemies.push({spot:spot,x:spot.x,y:spot.y,name:be2.name,
    color:be2.color,gun:be2.gun,
-   state:'peek',t:0,aim:aimBase*(0.85+Math.random()*0.4),cycle:0,warned:false,hp:100,burnT:0,burnAcc:0,chillT:0,flashT:0,ally:false,board:bi2});
+   state:'peek',t:0,aim:aimBase*(0.85+Math.random()*0.4),cycle:0,warned:false,hp:100,burnT:0,burnAcc:0,chillT:0,flashT:0,blindT:0,ally:false,board:bi2});
  G.spawned++;
 }
 function spawnAlly(){
@@ -471,7 +483,7 @@ function spawnAlly(){
  be2.active=true;
  G.enemies.push({spot:spot,x:spot.x,y:spot.y,name:be2.name,
    color:'#1f6e50',gun:be2.gun,
-   state:'peek',t:0,aim:99999,cycle:0,warned:false,hp:100,burnT:0,burnAcc:0,chillT:0,flashT:0,ally:true,board:bi2});
+   state:'peek',t:0,aim:99999,cycle:0,warned:false,hp:100,burnT:0,burnAcc:0,chillT:0,flashT:0,blindT:0,ally:true,board:bi2});
 }
 function feed(txt,color){G.feed.unshift({txt:txt,color:color||'#dfe6ee',t:4000});if(G.feed.length>4)G.feed.pop();}
 function pop(x,y,txt,color){G.pops.push({x:x,y:y,txt:txt,color:color,t:1100});}
@@ -492,9 +504,9 @@ function medal(text,color){G.medals.push({txt:text,color:color||'#ffd23f',t:1500
 function explodeFlames(e){SFX.boom();
  for(var i=0;i<14;i++)G.parts.push({x:e.x+(Math.random()*30-15),y:e.y-24+(Math.random()*16-8),t:380+Math.random()*220,dur:600,kind:'flame'});
  for(var i2=0;i2<7;i2++)G.parts.push({x:e.x+(Math.random()*24-12),y:e.y-30,t:700,dur:700,kind:'smoke'});
- for(var j=0;j<G.enemies.length;j++){var o=G.enemies[j];if(o!==e&&o.state!=='dead'&&Math.hypot(o.x-e.x,o.y-e.y)<70)o.burnT=Math.max(o.burnT,1200);}}
+ for(var j=0;j<G.enemies.length;j++){var o=G.enemies[j];if(o!==e&&o.state!=='dead'&&Math.hypot(o.x-e.x,o.y-e.y)<95)o.burnT=Math.max(o.burnT,1200);}}
 function implode(e){SFX.boom();G.parts.push({x:e.x,y:e.y-24,t:300,dur:300,kind:'void'});
- for(var j=0;j<G.enemies.length;j++){var o=G.enemies[j];if(o!==e&&o.state!=='dead'&&o.state!=='down'&&!o.ally&&Math.hypot(o.x-e.x,o.y-e.y)<115)damageEnemy(o,40,false,null);}}
+ for(var j=0;j<G.enemies.length;j++){var o=G.enemies[j];if(o!==e&&o.state!=='dead'&&o.state!=='down'&&!o.ally&&Math.hypot(o.x-e.x,o.y-e.y)<130)damageEnemy(o,65,false,null);}}
 function killEnemy(e,head,pt){
  if(e.state==='dead')return;
  var eq=sniperById(save.equipped);
@@ -506,7 +518,7 @@ function killEnemy(e,head,pt){
  if(CHAIN_MEDALS[G.chainN])medal(CHAIN_MEDALS[G.chainN],'#2affd5');
  if(STREAK_MEDALS[G.streakK])medal(STREAK_MEDALS[G.streakK],'#ff3b5c');
  var pts=(head?150:100)+Math.min(50,(G.streak-1)*10);
- var cn=head?25:15; var pj0=projOf(eq); if(pj0&&pj0.type==='gold')cn=Math.round(cn*1.5);
+ var cn=head?25:15; var pj0=projOf(eq); if(pj0&&pj0.type==='gold')cn=Math.round(cn*2);
  G.score+=pts;G.coinsEarned+=cn;save.coins+=cn;
  spawnKillFX(e.x,e.y-24);
  if(pt==='flame')explodeFlames(e);
@@ -524,7 +536,7 @@ function damageEnemy(e,dmg,head,pt){
  if(head){killEnemy(e,true,pt);return;}
  e.hp-=dmg;
  G.hitmarkT=200;G.hitmarkC='#ffffff';SFX.hitmark();
- if(pt==='flame')e.burnT=2200;
+ if(pt==='flame')e.burnT=2600;
  if(pt==='frost')e.chillT=3000;
  pop(e.x,e.y-62,''+Math.round(dmg),'#ffd9d9');
  if(pt==='electric'){
@@ -532,18 +544,28 @@ function damageEnemy(e,dmg,head,pt){
   for(var i=0;i<G.enemies.length;i++){var o=G.enemies[i];if(o===e||o.state==='dead'||o.state==='down'||o.ally)continue;
    var d=Math.hypot(o.x-e.x,o.y-e.y);if(d<200&&d<bd){bd=d;best=o;}}
   if(best){G.projs.push({type:'chain',x0:e.x,y0:e.y-24,x1:best.x,y1:best.y-24,t:0,dur:150,e:null,head:false,done:true,dmg:0});
-   damageEnemy(best,Math.round(dmg*0.5),false,null);}
+   damageEnemy(best,Math.round(dmg*0.5),false,null);
+   var hop2=null,hd=1e9;
+   for(var i2=0;i2<G.enemies.length;i2++){var o2=G.enemies[i2];if(o2===e||o2===best||o2.state==='dead'||o2.state==='down'||o2.ally)continue;
+    var dd=Math.hypot(o2.x-best.x,o2.y-best.y);if(dd<200&&dd<hd){hd=dd;hop2=o2;}}
+   if(hop2){G.projs.push({type:'chain',x0:best.x,y0:best.y-24,x1:hop2.x,y1:hop2.y-24,t:0,dur:150,e:null,head:false,done:true,dmg:0});
+    damageEnemy(hop2,Math.round(dmg*0.25),false,null);}}
  }
  if(e.hp<=0)killEnemy(e,false,pt);
 }
 function resolveShot(pr){
  if(pr.done)return; pr.done=true;
  var e=pr.e;
- if(!e||e.state==='dead'||e.state==='down'||e.ally)return;
+ if(!e||e.state==='dead'||e.ally||(e.state==='down'&&pr.type!=='spectre'))return;
  damageEnemy(e,pr.head?100000:pr.dmg,pr.head,pr.type==='std'?null:pr.type);
+ if(pr.type==='flare'){
+  for(var fi=0;fi<G.enemies.length;fi++){var fo=G.enemies[fi];
+   if(fo.state==='dead'||fo.ally)continue;
+   if(Math.hypot(fo.x-e.x,fo.y-e.y)<140){fo.blindT=1800;if(fo.state==='aim'){fo.state='peek';fo.t=0;fo.warned=false;}}}
+ }
  if(pr.type==='beam'){
   for(var i=0;i<G.enemies.length;i++){var o=G.enemies[i];
-   if(o!==e&&o.state!=='dead'&&o.state!=='down'&&!o.ally&&Math.abs(o.x-e.x)<=18){damageEnemy(o,pr.dmg,false,'beam');break;}}
+   if(o!==e&&o.state!=='dead'&&o.state!=='down'&&!o.ally&&Math.abs(o.x-e.x)<=18){damageEnemy(o,pr.dmg,false,'beam');}}
  }
 }
 function startReload(){var eq=sniperById(save.equipped);if(G.ammo>=eq.mag||G.reloadUntil)return;G.reloadUntil=performance.now()+eq.reload;SFX.reload();}
@@ -553,17 +575,17 @@ function fire(){
  var eq=sniperById(save.equipped);
  if(G.ammo<=0){startReload();return;}
  G.ammo--;G.boltUntil=now+eq.bolt;G.shots++;G.kick=1;G.shake=Math.max(G.shake,3);
- var pj=projOf(eq), ptype=pj?pj.type:'std';
+ var pj=projOf(eq), ptype=pj?pj.type:tracerOf(eq);
  SFX.shotFor(ptype==='std'?null:ptype);
  var c=crossWorld(),hitE=null,head=false;
- for(var i=0;i<G.enemies.length;i++){var e=G.enemies[i];if(e.state==='down'||e.state==='dead'||e.ally)continue;
+ for(var i=0;i<G.enemies.length;i++){var e=G.enemies[i];if(e.state==='dead'||e.ally||(e.state==='down'&&ptype!=='spectre'))continue;
   if(Math.abs(c.x-e.x)<=13&&c.y>=e.y-48&&c.y<=e.y+2){hitE=e;head=(c.y<=e.y-34);break;}}
  if(!hitE)G.streak=0;
  var mx=G.camX+viewW()*0.74, my=G.camY+viewH()*0.98;
  var tx=hitE?hitE.x:c.x, ty=hitE?(head?hitE.y-41:hitE.y-24):c.y;
  var dist=Math.hypot(tx-mx,ty-my);
- var speed=ptype==='flame'?1500:(ptype==='void'?1250:(ptype==='frost'?2100:(ptype==='gold'?2600:0)));
- var pr={type:ptype,x0:mx,y0:my,x1:tx,y1:ty,t:0,dur:speed?Math.max(40,dist/speed*1000):130,e:hitE,head:head,done:false,dmg:eq.dmg};
+ var speed=ptype==='flame'?1500:(ptype==='void'?1250:(ptype==='frost'?2100:(ptype==='gold'?2600:(ptype==='flare'?2400:0))));
+ var pr={type:ptype,x0:mx,y0:my,x1:tx,y1:ty,t:0,dur:speed?Math.max(40,dist/speed*1000):130,e:hitE,head:head,done:false,dmg:ptype==='rail'?Math.round(eq.dmg*1.25):eq.dmg};
  G.projs.push(pr);
  if(!speed)resolveShot(pr);
  if(G.ammo<=0)startReload();
@@ -649,14 +671,14 @@ function update(dt){
   if(e.state==='dead'){if(e.t>450){if(e.board>=0&&G.board[e.board]){G.board[e.board].active=false;G.board[e.board].respawnAt=performance.now()+2600+Math.random()*1600;}G.enemies.splice(k,1);}continue;}
   if(G.dead)continue;
   if(e.ally){if(e.state==='peek'&&e.t>2400){e.state='down';e.t=0;}else if(e.state==='down'&&e.t>1600){e.state='peek';e.t=0;}continue;}
-  if(e.flashT>0)e.flashT-=dt; if(e.chillT>0)e.chillT-=dt;
-  if(e.burnT>0){e.burnT-=dt;e.burnAcc=(e.burnAcc||0)+dt*0.02;
+  if(e.flashT>0)e.flashT-=dt; if(e.chillT>0)e.chillT-=dt; if(e.blindT>0)e.blindT-=dt;
+  if(e.burnT>0){e.burnT-=dt;e.burnAcc=(e.burnAcc||0)+dt*0.03;
    if(Math.random()<0.3)G.parts.push({x:e.x+(Math.random()*14-7),y:e.y-30-Math.random()*10,t:300,dur:300,kind:'flame'});
    if(e.burnAcc>=1){var bd2=Math.floor(e.burnAcc);e.burnAcc-=bd2;e.hp-=bd2;e.flashT=120;
     if(e.hp<=0){killEnemy(e,false,'flame');continue;}}}
-  if(e.state==='peek'){if(e.t>320){e.state='aim';e.t=0;}}
+  if(e.state==='peek'){if(e.t>320&&!(e.blindT>0)){e.state='aim';e.t=0;}}
   else if(e.state==='aim'){
-   var eAim=e.aim*(e.chillT>0?1.45:1);
+   var eAim=e.aim*(e.chillT>0?1.8:1);
    if(!e.warned&&e.t>eAim*0.62){e.warned=true;SFX.warn();}
    if(e.t>=eAim)enemyFire(e);
   }
@@ -719,6 +741,20 @@ function drawProjDesign(s,now,bx,mx){
   ctx.fillStyle='#ff3b5c'; ctx.beginPath(); ctx.arc(-14,-11.5,2.5,0,7); ctx.fill();
   ctx.fillStyle='#3fa9f5'; ctx.beginPath(); ctx.arc(2,-11.5,2.5,0,7); ctx.fill();
   ctx.fillStyle=a; ctx.beginPath(); ctx.arc(mx+3,-1,3.1,0,7); ctx.fill();
+ } else if(s.id==='sr_ghostlegacy'){ /* holo spectre ring + ghost fins */
+  ctx.strokeStyle=a; ctx.lineWidth=2; ctx.globalAlpha=0.65+0.35*Math.sin(now/240);
+  ctx.beginPath(); ctx.arc(bx+22,-1,9,0,7); ctx.stroke(); ctx.globalAlpha=1;
+  ctx.fillStyle=a;
+  ctx.beginPath(); ctx.moveTo(bx+2,-9); ctx.lineTo(bx+12,-15); ctx.lineTo(bx+14,-8); ctx.fill();
+  ctx.beginPath(); ctx.arc(mx+4,-1,3.4,0,7); ctx.fill();
+ } else if(s.id==='sr_phantomzero'){ /* rail coils */
+  ctx.strokeStyle=a; ctx.lineWidth=2.2;
+  for(var r5=0;r5<4;r5++){ctx.beginPath(); ctx.arc(bx+8+r5*12,-1,4.6,0,7); ctx.stroke();}
+  ctx.fillStyle='#eafffb'; ctx.beginPath(); ctx.arc(mx+4,-1,2.8,0,7); ctx.fill();
+ } else if(s.id==='sr_lastlight'){ /* flare sun muzzle */
+  ctx.fillStyle=a; var lf=0.75+0.25*Math.sin(now/90);
+  for(var r6=0;r6<6;r6++){var la=r6*Math.PI/3+now/700; ctx.fillRect(mx+4+Math.cos(la)*6*lf-0.8,-1+Math.sin(la)*6*lf-0.8,1.6,1.6);}
+  ctx.fillStyle='#fff3b0'; ctx.beginPath(); ctx.arc(mx+4,-1,3.6,0,7); ctx.fill();
  }
 }
 function drawRifle(cx,baseY,s,scale,now){
@@ -897,6 +933,7 @@ function drawEnemy(e,now){
  if(e.state!=='dead'){
   if(e.hp<100&&e.state!=='down'){ctx.fillStyle='rgba(0,0,0,0.55)';ctx.fillRect(x-13,y-58,26,4);ctx.fillStyle=e.hp>40?'#3fe07a':'#ff4040';ctx.fillRect(x-12,y-57,24*Math.max(0,e.hp)/100,2);}
   if(e.chillT>0){ctx.fillStyle='rgba(160,230,255,0.30)';ctx.fillRect(x-10,y-46,20,34);}
+ if(e.blindT>0){ctx.save();ctx.translate(x,y-54);ctx.rotate(now/300);ctx.fillStyle='rgba(255,255,240,0.95)';ctx.fillRect(-7,-1.2,14,2.4);ctx.fillRect(-1.2,-7,2.4,14);ctx.restore();}
   if(e.burnT>0){ctx.fillStyle='rgba(255,106,0,'+(0.45+0.3*Math.sin(now/70))+')';ctx.beginPath();ctx.arc(x,y-30,11+2*Math.sin(now/90),0,7);ctx.fill();ctx.fillStyle='#ffd23f';ctx.beginPath();ctx.arc(x,y-32,5.5,0,7);ctx.fill();}
   if(e.flashT>0){ctx.fillStyle='rgba(255,255,255,'+Math.min(0.8,e.flashT/200)+')';ctx.fillRect(x-10,y-46,20,36);}
  }
@@ -938,7 +975,7 @@ function draw(){
   addBtn(90,434,300,40,'HOW TO PLAY',function(){SFX.click();screen='howto';},'ghost');
   addBtn(90,486,300,34,save.mute?'🔇 SOUND: OFF':'🔊 SOUND: ON',function(){save.mute=!save.mute;persist();},'ghost');
   txt('Drag or scroll to aim · one shot, one kill',240,536,10,'#5f7191','center');
-  txt('Created by Jeff H. (MrGhost) · v4.1',240,554,10,'#8fa8c8','center');
+  txt('Created by Jeff H. (MrGhost) · v5.0',240,554,10,'#8fa8c8','center');
  }
  else if(screen==='howto'){
   skyBG('#0d1322','#0d1322');header('HOW TO PLAY');
@@ -956,9 +993,9 @@ function draw(){
    ['COVER','Hold DUCK to drop behind cover — shots miss you.'],
    ['MEDALS','Chains call out DOUBLE KILL, MULTI-KILL and more.'],
    ['','Streaks: 5 BLOODTHIRSTY · 10 MERCILESS · 15 RELENTLESS.'],
-   ['LEGENDS','Legendary rifles fire special rounds — beams,'],
-   ['','fire, lightning, void, frost, gold — bonuses listed'],
-   ['','in the ARMORY, with themed reticles and sounds.']
+   ['TOP TIERS','ULTRA + LEGENDARY rifles fire special rounds:'],
+   ['','beams, fire, lightning, phase rounds, rails, flares.'],
+   ['','Bonuses in the ARMORY · themed reticles + sounds.']
   ];
   var y=84;for(var li=0;li<lines.length;li++){
    if(lines[li][0]){txt(lines[li][0],28,y,13,'#2affd5','left');y+=4;}
@@ -1034,6 +1071,7 @@ function drawArmory(){
  txt(s2.name,16,470,15,'#fff','left');
  txt(rar(s2.rar).name,464,470,11,rar(s2.rar).color,'right');
  var info='DMG '+s2.dmg+' · MAG '+s2.mag+' · '+(s2.semi?'SEMI-AUTO':'BOLT '+s2.bolt+'ms')+' · ADS '+s2.ads+'ms · RELOAD '+(s2.reload/1000).toFixed(1)+'s';
+ var trc2=tracerOf(s2); if(!pj2&&TRACERS[trc2])info+=' · '+TRACERS[trc2];
  if(pj2){var bl='★ '+pj2.name+': ';
   txt(bl,16,486,10,'#ffb400','left');
   txt(pj2.bonus,16+ctx.measureText(bl).width+2,486,9.5,'#cfe8ff','left');
@@ -1062,7 +1100,7 @@ function drawCases(){
   txt(oddsTxt.slice(0,2).join(' · '),90,y+42,9.5,'#9fb4cc','left');
   txt(oddsTxt.slice(2,4).join(' · '),90,y+54,9.5,'#9fb4cc','left');
   txt(oddsTxt.slice(4).join(' · '),90,y+66,9.5,'#9fb4cc','left');
-  txt(c.fxOnly?'KILL EFFECTS ONLY · ALL 12 · UP TO PHANTOM':'Drops rifles + kill effects up to PHANTOM',90,y+82,9.5,c.color,'left');
+  txt(c.fxOnly?'KILL EFFECTS ONLY · ALL 12 · UP TO PHANTOM':'Drops rifles + kill effects up to LEGENDARY',90,y+82,9.5,c.color,'left');
   (function(cc,ow){
    if(ow>0)addBtn(322,y+58,118,30,'OPEN CHEST',function(){var res=openCase(cc,true);if(res)startOpening(cc,res);});
    else{var af=save.coins>=cc.price;
@@ -1199,6 +1237,43 @@ function drawProjectiles(now){
   } else if(pr.type==='gold'){
    ctx.fillStyle='#ffd23f'; ctx.beginPath(); ctx.arc(cxp,cyp,3.2,0,7); ctx.fill();
    ctx.fillStyle='rgba(255,233,138,'+(0.5+0.5*Math.sin(now/60))+')'; ctx.fillRect(cxp-1,cyp-6,2,12); ctx.fillRect(cxp-6,cyp-1,12,2);
+  } else if(pr.type==='spectre'){
+   ctx.globalAlpha=al; ctx.strokeStyle='#aef7e8'; ctx.lineWidth=2.4;
+   ctx.beginPath(); ctx.moveTo(pr.x0,pr.y0); ctx.lineTo(cxp,cyp); ctx.stroke();
+   ctx.strokeStyle='rgba(174,247,232,0.45)'; ctx.lineWidth=5.5;
+   ctx.beginPath(); ctx.moveTo(pr.x0,pr.y0); ctx.lineTo(cxp,cyp); ctx.stroke();
+   ctx.lineWidth=1.4;
+   for(var si2=1;si2<=3;si2++){var fx2=pr.x0+(pr.x1-pr.x0)*Math.max(0,prg-si2*0.13), fy2=pr.y0+(pr.y1-pr.y0)*Math.max(0,prg-si2*0.13);
+    ctx.strokeStyle='rgba(174,247,232,'+(0.55-si2*0.13)+')'; ctx.beginPath(); ctx.arc(fx2,fy2,3.4,0,7); ctx.stroke();}
+   ctx.globalAlpha=1;
+  } else if(pr.type==='rail'){
+   ctx.globalAlpha=al; ctx.strokeStyle='rgba(42,255,213,0.55)'; ctx.lineWidth=6;
+   ctx.beginPath(); ctx.moveTo(pr.x0,pr.y0); ctx.lineTo(pr.x1,pr.y1); ctx.stroke();
+   ctx.strokeStyle='#ffffff'; ctx.lineWidth=2.2;
+   ctx.beginPath(); ctx.moveTo(pr.x0,pr.y0); ctx.lineTo(pr.x1,pr.y1); ctx.stroke();
+   ctx.strokeStyle='#eafffb'; ctx.lineWidth=1.6;
+   ctx.beginPath(); ctx.arc(pr.x1,pr.y1,4+prg*13,0,7); ctx.stroke(); ctx.globalAlpha=1;
+  } else if(pr.type==='flare'){
+   ctx.fillStyle='rgba(255,243,176,0.35)'; ctx.beginPath(); ctx.arc(cxp,cyp,11,0,7); ctx.fill();
+   ctx.fillStyle='#fff3b0'; ctx.beginPath(); ctx.arc(cxp,cyp,5.6,0,7); ctx.fill();
+   ctx.fillStyle='#ffffff'; ctx.beginPath(); ctx.arc(cxp,cyp,2.6,0,7); ctx.fill();
+  } else if(pr.type==='pulse'||pr.type.indexOf('tr_')===0){
+   var dx3=pr.x1-pr.x0, dy3=pr.y1-pr.y0, dl3=Math.hypot(dx3,dy3)||1;
+   var tc3=pr.type==='pulse'?sniperById(save.equipped).accent:(pr.type==='tr_ember'?'#ff8c1a':pr.type==='tr_frost'?'#bfefff':pr.type==='tr_arc'?'#7fe7ff':'#b45cff');
+   ctx.globalAlpha=al;
+   if(pr.type==='tr_arc'){
+    ctx.strokeStyle=tc3; ctx.lineWidth=1.8; ctx.beginPath();
+    for(var sg=0;sg<=6;sg++){var px3=pr.x0+dx3*sg/6, py3=pr.y0+dy3*sg/6+((sg%2&&sg<6)?(sg%4===1?4:-4):0);
+     if(sg===0)ctx.moveTo(px3,py3);else ctx.lineTo(px3,py3);}
+    ctx.stroke();
+   } else {
+    ctx.strokeStyle=tc3; ctx.lineWidth=pr.type==='pulse'?(2+1.7*Math.abs(Math.sin(now/45))):2.2;
+    ctx.beginPath(); ctx.moveTo(cxp-dx3/dl3*46,cyp-dy3/dl3*46); ctx.lineTo(cxp,cyp); ctx.stroke();
+    if(pr.type==='tr_ember'){ctx.fillStyle='#ffd23f';for(var eb=0;eb<3;eb++){var ef=Math.max(0,prg-eb*0.09);ctx.beginPath();ctx.arc(pr.x0+dx3*ef,pr.y0+dy3*ef,2.1,0,7);ctx.fill();}}
+    if(pr.type==='tr_frost'){ctx.save();ctx.translate(cxp,cyp);ctx.rotate(Math.atan2(dy3,dx3));ctx.fillStyle='#eafffb';ctx.beginPath();ctx.moveTo(6,0);ctx.lineTo(0,-2.8);ctx.lineTo(-6,0);ctx.lineTo(0,2.8);ctx.fill();ctx.restore();}
+    if(pr.type==='tr_void'){ctx.strokeStyle=tc3;ctx.lineWidth=1.6;ctx.beginPath();ctx.arc(cxp,cyp,5.5,0,7);ctx.stroke();}
+   }
+   ctx.globalAlpha=1;
   } else { /* standard tracer */
    var dx=pr.x1-pr.x0, dy=pr.y1-pr.y0, dl=Math.hypot(dx,dy)||1;
    ctx.strokeStyle='rgba(255,240,200,'+al+')'; ctx.lineWidth=2;
@@ -1303,7 +1378,7 @@ function drawGame(now){
  drawProjectiles(now); drawParts();
  ctx.strokeStyle='rgba(255,40,40,0.55)'; ctx.lineWidth=1.2;
  for(var e3=0;e3<G.enemies.length;e3++){var en=G.enemies[e3];
-  if(en.state==='aim'&&en.t>en.aim*(en.chillT>0?1.45:1)*0.62){ctx.beginPath();
+  if(en.state==='aim'&&en.t>en.aim*(en.chillT>0?1.8:1)*0.62){ctx.beginPath();
    ctx.moveTo(en.x+(en.x<WORLD_W/2?13:-13),en.y-33);
    ctx.lineTo(G.camX+viewW()/2, G.camY+viewH()-14); ctx.stroke();}}
  ctx.restore();
@@ -1311,8 +1386,8 @@ function drawGame(now){
  for(var p=0;p<G.pops.length;p++){var pp=G.pops[p];
   txt(pp.txt,(pp.x-G.camX)*z,(pp.y-G.camY)*z,15,pp.color,'center');}
  var cw2=crossWorld(), csx=(cw2.x-G.camX)*z, csy=(cw2.y-G.camY)*z;
- var pjR=projOf(eq), ptyR=pjR?pjR.type:'std';
- var rcR=ptyR==='flame'?'#ff8c1a':ptyR==='electric'?'#7fe7ff':ptyR==='beam'?'#e8d8ff':ptyR==='void'?'#b45cff':ptyR==='frost'?'#bfefff':ptyR==='gold'?'#ffd23f':eq.accent;
+ var pjR=projOf(eq), ptyR=pjR?pjR.type:tracerOf(eq);
+ var rcR=ptyR==='flame'?'#ff8c1a':ptyR==='electric'?'#7fe7ff':ptyR==='beam'?'#e8d8ff':ptyR==='void'?'#b45cff':ptyR==='frost'?'#bfefff':ptyR==='gold'?'#ffd23f':ptyR==='spectre'?'#aef7e8':ptyR==='rail'?'#eafffb':ptyR==='flare'?'#fff3b0':eq.accent;
  if(z>=2){
   var R=z>=3?168:150;
   ctx.fillStyle='rgba(2,3,6,0.88)';
@@ -1349,6 +1424,14 @@ function drawGame(now){
    else if(ptyR==='gold'){ctx.fillStyle=rcR;var ga=now/280;
     for(var gi=0;gi<4;gi++){var gx2=csx+Math.cos(ga+gi*Math.PI/2)*19, gy2=csy+Math.sin(ga+gi*Math.PI/2)*19;
      ctx.fillRect(gx2-1,gy2-4,2,8);ctx.fillRect(gx2-4,gy2-1,8,2);}}
+   else if(ptyR==='spectre'){ctx.strokeStyle=rcR;ctx.lineWidth=2;ctx.setLineDash([7,6]);ctx.lineDashOffset=-now/28;
+    ctx.beginPath();ctx.arc(csx,csy,25,0,7);ctx.stroke();ctx.setLineDash([]);}
+   else if(ptyR==='rail'){ctx.strokeStyle=rcR;ctx.lineWidth=2.4;
+    ctx.beginPath();ctx.moveTo(csx-30,csy-13);ctx.lineTo(csx-13,csy-13);ctx.moveTo(csx+13,csy-13);ctx.lineTo(csx+30,csy-13);
+    ctx.moveTo(csx-30,csy+13);ctx.lineTo(csx-13,csy+13);ctx.moveTo(csx+13,csy+13);ctx.lineTo(csx+30,csy+13);ctx.stroke();}
+   else if(ptyR==='flare'){ctx.fillStyle=rcR;var fa2=now/500;
+    for(var fi3=0;fi3<8;fi3++){var fx4=csx+Math.cos(fa2+fi3*Math.PI/4)*21, fy4=csy+Math.sin(fa2+fi3*Math.PI/4)*21;
+     ctx.fillRect(fx4-1,fy4-3.4,2,6.8);}}
   }
   ctx.fillStyle='#ff4040'; ctx.fillRect(csx-1,csy-1,2,2);
   if(G.hitmarkT>0){var ha=Math.min(1,G.hitmarkT/200);
@@ -1510,9 +1593,9 @@ requestAnimationFrame(loop);
 
 /* debug/test hooks */
 window.__sa={get screen(){return screen;},set screen(v){screen=v;},
- get G(){return G;},save:save,SNIPERS:SNIPERS,CASES:CASES,MODELS:MODELS,
- newRun:newRun,fire:fire,openCase:openCase,startOpening:startOpening,buildStrip:buildStrip,spawnEnemy:spawnEnemy,KILLFX:KILLFX,killFxById:killFxById,MAPS:MAPS,curMap:curMap,nextWave:nextWave,
- sniperById:sniperById,ownedCount:ownedCount,damageEnemy:damageEnemy,killEnemy:killEnemy,PROJ:PROJ,projOf:projOf,medal:medal,startReload:startReload,MODES:MODES,endMatch:endMatch,playerDie:playerDie,respawnPlayer:respawnPlayer,ambientEvent:ambientEvent,spawnAlly:spawnAlly,teamKills:teamKills,sortedBoard:sortedBoard};
+ get G(){return G;},save:save,SNIPERS:SNIPERS,RARITIES:RARITIES,CASES:CASES,MODELS:MODELS,
+ newRun:newRun,fire:fire,openCase:openCase,startOpening:startOpening,buildStrip:buildStrip,tracerOf:tracerOf,TRACERS:TRACERS,spawnEnemy:spawnEnemy,KILLFX:KILLFX,killFxById:killFxById,MAPS:MAPS,curMap:curMap,nextWave:nextWave,
+ sniperById:sniperById,ownedCount:ownedCount,damageEnemy:damageEnemy,killEnemy:killEnemy,resolveShot:resolveShot,PROJ:PROJ,projOf:projOf,medal:medal,startReload:startReload,MODES:MODES,endMatch:endMatch,playerDie:playerDie,respawnPlayer:respawnPlayer,ambientEvent:ambientEvent,spawnAlly:spawnAlly,teamKills:teamKills,sortedBoard:sortedBoard};
 </script>
 </body>
 </html>

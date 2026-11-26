@@ -3,9 +3,10 @@
 An original arena sniping game built for the Rabbit R1 (240×282), by **Jeff H. (MrGhost)**.
 All art, item names and code are original to this creation.
 
-**Version 4.1** — case-opening overhaul: spinning prize reel, rarity reveals, starter chests.
-(4.0 added COD-style multiplayer matches: 3-minute games, respawns, medals,
-legendary projectile weapons, pause menu with aim sensitivity.)
+**Version 5.0** — rarity ladder rebuilt: LEGENDARY is now the top tier, Phantom is
+renamed ULTRA, Ultra rifles gain their own projectiles, Legendaries are buffed,
+and Epic/Mythic rifles fire unique tracers.
+(4.1 added the case-opening overhaul + starter chests; 4.0 added COD-style matches.)
 
 ## The Match (3:00, respawns)
 - **FREE-FOR-ALL** — every sniper for themselves; most points wins.
@@ -24,15 +25,22 @@ legendary projectile weapons, pause menu with aim sensitivity.)
   against 100 HP — some rifles need two hits. Enemy HP bars show the damage.
 - **Bolt-action** rifles cycle between shots; two **semi-autos** rip fast.
   Every rifle has its own damage, mag size, rechamber and ADS speed (in the Armory).
-- **Legendary rifles fire special projectiles**, each with a listed bonus:
-  - **Suncrown Regent — SOLAR LANCE**: a beam that pierces to a 2nd enemy
-  - **Inferno Parade — IMMOLATION**: flaming rounds, burn DoT, fiery explosions
-  - **Aurora Veil — CHAIN LIGHTNING**: Zeus-pylon rifle; hits arc to a nearby enemy
-  - **Kraken Depth — DEEP FREEZE**: chills enemies (aim slowed), kills shatter
-  - **Widow Waltz — EVENT HORIZON**: kills implode, damaging nearby enemies
-  - **Monarch Decree — GILDED ROUNDS**: kills pay +50% coins
-  Each one changes your ADS reticle and shot sound to match its projectile.
-- **Cases**: Standard (100⬢), Elite (300⬢), Phantom (800⬢) drop rifles or one of
+- **Rarity ladder**: Common < Rare < Epic < Mythic < Ultra < **Legendary** (top).
+  Stats follow the tier — Legendaries are the fastest, steadiest rifles in the game.
+- **Legendary + Ultra rifles fire special projectiles**, each with a listed bonus,
+  a themed ADS reticle and a matching shot sound:
+  - **Suncrown Regent — SOLAR LANCE**: a beam that pierces EVERY enemy in line
+  - **Inferno Parade — IMMOLATION**: flaming rounds, heavy burn, fiery explosions
+  - **Aurora Veil — CHAIN LIGHTNING**: Zeus-pylon rifle; arcs to 2 enemies (50% / 25%)
+  - **Kraken Depth — DEEP FREEZE**: chills enemies (aim slowed 55%), kills shatter
+  - **Widow Waltz — EVENT HORIZON**: kills implode for 65 dmg nearby
+  - **Monarch Decree — GILDED ROUNDS**: kills pay +100% coins
+  - **GHOST LEGACY — SPECTRE**: phase rounds that hit enemies through cover
+  - **Phantom Zero — ZERO POINT**: rail spike, +25% dmg — body shots kill
+  - **Last Light — LAST LIGHT**: flare rounds that blind nearby enemies, resetting their aim
+- **Epic + Mythic rifles fire unique tracers** (Pulse, Ember, Frost, Arc, Void),
+  named on their Armory stat line.
+- **Cases**: Standard (100⬢), Elite (300⬢), Ultra (800⬢) drop rifles or one of
   **12 kill effects**; the **Kill FX Chest** (250⬢) drops kill effects only.
   Every player starts with **one chest of each kind**. Opening a case plays a
   spinning prize reel that slows onto your drop, with a rarity-tiered reveal.
