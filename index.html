@@ -419,6 +419,7 @@ function update(dt){
 function txt(s,x,y,size,color,align,weight){ctx.fillStyle=color;ctx.font=(weight||'bold')+' '+size+'px Verdana,Geneva,sans-serif';ctx.textAlign=align||'left';ctx.textBaseline='middle';ctx.fillText(s,x,y);}
 function panel(x,y,w,h,fill,stroke){ctx.fillStyle=fill;ctx.fillRect(x,y,w,h);if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.strokeRect(x+1,y+1,w-2,h-2);}}
 function drawButtons(){for(var i=0;i<buttons.length;i++){var b=buttons[i];
+ if(b.style==='cell')continue; /* invisible hit-area: the grid cell itself is already drawn */
  if(b.style==='fire'){ctx.fillStyle='rgba(230,40,40,0.85)';ctx.beginPath();ctx.arc(b.x+b.w/2,b.y+b.h/2,b.w/2,0,7);ctx.fill();ctx.strokeStyle='#ffb3b3';ctx.lineWidth=2;ctx.stroke();txt(b.label,b.x+b.w/2,b.y+b.h/2,15,'#fff','center');}
  else if(b.style==='ghost'){panel(b.x,b.y,b.w,b.h,'rgba(16,22,38,0.85)','#3fa9f5');txt(b.label,b.x+b.w/2,b.y+b.h/2,13,'#cfe8ff','center');}
  else if(b.style==='dim'){panel(b.x,b.y,b.w,b.h,'rgba(30,34,46,0.9)','#565f73');txt(b.label,b.x+b.w/2,b.y+b.h/2,13,'#8b95a9','center');}
