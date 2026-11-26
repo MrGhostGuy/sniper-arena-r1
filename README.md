@@ -3,8 +3,9 @@
 An original arena sniping game built for the Rabbit R1 (240×282), by **Jeff H. (MrGhost)**.
 All art, item names and code are original to this creation.
 
-**Version 4.0** — COD-style multiplayer matches: 3-minute games, respawns, medals,
-legendary projectile weapons, pause menu with aim sensitivity.
+**Version 4.1** — case-opening overhaul: spinning prize reel, rarity reveals, starter chests.
+(4.0 added COD-style multiplayer matches: 3-minute games, respawns, medals,
+legendary projectile weapons, pause menu with aim sensitivity.)
 
 ## The Match (3:00, respawns)
 - **FREE-FOR-ALL** — every sniper for themselves; most points wins.
@@ -32,7 +33,10 @@ legendary projectile weapons, pause menu with aim sensitivity.
   - **Monarch Decree — GILDED ROUNDS**: kills pay +50% coins
   Each one changes your ADS reticle and shot sound to match its projectile.
 - **Cases**: Standard (100⬢), Elite (300⬢), Phantom (800⬢) drop rifles or one of
-  **12 kill effects**; duplicates convert back into coins.
+  **12 kill effects**; the **Kill FX Chest** (250⬢) drops kill effects only.
+  Every player starts with **one chest of each kind**. Opening a case plays a
+  spinning prize reel that slows onto your drop, with a rarity-tiered reveal.
+  Duplicates convert back into coins.
 - **Pause menu** (top-right): aim sensitivity, restart match, exit.
 
 ## Controls
