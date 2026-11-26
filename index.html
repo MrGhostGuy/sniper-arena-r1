@@ -217,11 +217,29 @@ function noiseBurst(dur,g){if(save.mute)return;var a=ac();if(!a)return;try{
  var s=a.createBufferSource();s.buffer=buf;var gn=a.createGain();gn.gain.value=g;
  var f=a.createBiquadFilter();f.type='lowpass';f.frequency.value=900;
  s.connect(f);f.connect(gn);gn.connect(a.destination);s.start();}catch(e){}}
+function thump(f0,f1,d,g,when){if(save.mute)return;var a=ac();if(!a)return;try{
+ var o=a.createOscillator(),gn=a.createGain();o.type='sine';
+ var t=a.currentTime+(when||0);
+ o.frequency.setValueAtTime(f0,t);o.frequency.exponentialRampToValueAtTime(Math.max(20,f1),t+d);
+ gn.gain.setValueAtTime(g,t);gn.gain.exponentialRampToValueAtTime(0.0001,t+d);
+ o.connect(gn);gn.connect(a.destination);o.start(t);o.stop(t+d+0.02);}catch(e){}}
+function crack(freq,d,g,when){if(save.mute)return;var a=ac();if(!a)return;try{
+ var len=Math.floor(a.sampleRate*d),buf=a.createBuffer(1,len,a.sampleRate),ch=buf.getChannelData(0);
+ for(var i=0;i<len;i++)ch[i]=(Math.random()*2-1)*(1-i/len);
+ var s=a.createBufferSource();s.buffer=buf;
+ var f=a.createBiquadFilter();f.type='bandpass';f.frequency.value=freq;f.Q.value=0.9;
+ var gn=a.createGain();gn.gain.value=g;
+ s.connect(f);f.connect(gn);gn.connect(a.destination);s.start(a.currentTime+(when||0));}catch(e){}}
+function ping(f,d,g,when){if(save.mute)return;var a=ac();if(!a)return;try{
+ var o=a.createOscillator(),gn=a.createGain();o.type='triangle';
+ var t=a.currentTime+(when||0);o.frequency.value=f;
+ gn.gain.setValueAtTime(g,t);gn.gain.exponentialRampToValueAtTime(0.0001,t+d);
+ o.connect(gn);gn.connect(a.destination);o.start(t);o.stop(t+d+0.02);}catch(e){}}
 var SFX={
  click:function(){beep(660,0.05,'square',0.04);},
  shot:function(){noiseBurst(0.22,0.5);beep(120,0.18,'sawtooth',0.12);},
- hit:function(){beep(880,0.07,'square',0.06);beep(1320,0.09,'square',0.05,0.05);},
- head:function(){beep(1180,0.07,'square',0.07);beep(1760,0.12,'square',0.06,0.06);},
+ kill:function(){crack(1700,0.07,0.32);thump(165,44,0.22,0.5);noiseBurst(0.1,0.18);beep(520,0.06,'triangle',0.05,0.055);},
+ headshot:function(){crack(2600,0.06,0.36);thump(195,52,0.18,0.5);ping(2093,0.3,0.16,0.03);ping(1568,0.22,0.08,0.03);beep(740,0.05,'triangle',0.05,0.05);},
  hurt:function(){beep(140,0.2,'sawtooth',0.14);noiseBurst(0.12,0.2);},
  warn:function(){beep(1560,0.05,'square',0.045);},
  coin:function(){beep(990,0.06,'square',0.05);beep(1480,0.1,'square',0.05,0.05);},
@@ -349,7 +367,7 @@ function fire(){
   G.kills++;hitE.state='dead';hitE.t=0;spawnKillFX(hitE.x,hitE.y-24);
   pop(hitE.x,hitE.y-58,(head?'HEADSHOT ':'')+'+'+pts,head?'#ffd23f':'#ffffff');
   feed('YOU ▸ '+hitE.name+'  +'+pts,head?'#ffd23f':'#9fe8ff');
-  if(head)SFX.head();else SFX.hit();persist();
+  if(head)SFX.headshot();else SFX.kill();persist();
  } else {G.streak=0;}
 }
 function enemyFire(e){
@@ -632,8 +650,7 @@ function draw(){
   ctx.fillStyle='#0d1120';for(var i=0;i<BUILDINGS.length;i++){var b=BUILDINGS[i];ctx.fillRect((b.x*0.5)%(WORLD_W/2)-40,b.top+60,b.w,H);}
   ctx.fillStyle='#ffb35c';ctx.beginPath();ctx.arc(392,120,30,0,7);ctx.fill();
   txt('R1',240,88,36,'#eafffa','center');txt('SHARPSHOOTER',240,130,42,'#2affd5','center');
-  txt('— OFFLINE ARENA vs AI SNIPERS —',240,162,11,'#9fd8ff','center');
-  txt('by Jeff H. (MrGhost)',240,180,11,'#ffd23f','center');
+  txt('— OFFLINE ARENA vs AI SNIPERS —',240,168,11,'#9fd8ff','center');
   var eq=sniperById(save.equipped);
   panel(60,192,360,104,'rgba(10,14,24,0.88)',rar(eq.rar).color);
   txt('EQUIPPED · '+rar(eq.rar).name,240,210,10,rar(eq.rar).color,'center');
@@ -646,7 +663,7 @@ function draw(){
   addBtn(90,434,300,40,'HOW TO PLAY',function(){SFX.click();screen='howto';},'ghost');
   addBtn(90,486,300,34,save.mute?'🔇 SOUND: OFF':'🔊 SOUND: ON',function(){save.mute=!save.mute;persist();},'ghost');
   txt('Drag or scroll to aim · one shot, one kill',240,536,10,'#5f7191','center');
-  txt('Created by Jeff H. (MrGhost)',240,554,10,'#8fa8c8','center');
+  txt('Created by Jeff H. (MrGhost) · v3.0',240,554,10,'#8fa8c8','center');
  }
  else if(screen==='howto'){
   skyBG('#0d1322','#0d1322');header('HOW TO PLAY');

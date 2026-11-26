@@ -3,6 +3,8 @@
 An original arena sniping game built for the Rabbit R1 (240×282), by **Jeff H. (MrGhost)**.
 All art, item names and code are original to this creation.
 
+**Version 3.0** — kill effects, 3 rotating maps, kill & headshot sounds, Armory fix.
+
 ## Play
 - **Scope-duel AI snipers** — watch for the scope glint, beat them to the shot,
   duck into cover when the laser locks on.
