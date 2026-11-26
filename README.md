@@ -3,27 +3,42 @@
 An original arena sniping game built for the Rabbit R1 (240×282), by **Jeff H. (MrGhost)**.
 All art, item names and code are original to this creation.
 
-**Version 3.0** — kill effects, 3 rotating maps, kill & headshot sounds, Armory fix.
+**Version 4.0** — COD-style multiplayer matches: 3-minute games, respawns, medals,
+legendary projectile weapons, pause menu with aim sensitivity.
 
-## Play
-- **Scope-duel AI snipers** — watch for the scope glint, beat them to the shot,
-  duck into cover when the laser locks on.
-- **3 rotating maps**, a new one every wave: Downtown Rooftops, Neon Docks and
-  Dust Canyon — each with its own look and its own enemy positions.
-- **Waves** that get faster and meaner; kills, headshots and streaks pay coins.
-- **Cases**: Standard (100⬢), Elite (300⬢) and Phantom (800⬢). Every case drops
-  a sniper **or a kill effect**; duplicates convert back into coins automatically.
-- **36 rifles, 9 distinct models, 6 rarity tiers** — Common, Rare, Epic, Legendary,
-  Mythic, Phantom. The rarest rifles have animated effects of their own.
-- **12 collectible kill effects** that play on every kill, from Spark Pop up to
-  Lightning Strike, Soul Reaper, Void Implosion and Reality Tear.
-- **Armory**: browse rifles and kill effects, compare stats, equip your best loadout.
-- Progress (coins, collections, best score) saves on-device in localStorage.
+## The Match (3:00, respawns)
+- **FREE-FOR-ALL** — every sniper for themselves; most points wins.
+- **TEAM DEATHMATCH** — you + 3 AI allies vs 4 rivals; most team kills wins.
+- **FLAG HUNT** — one flag; kill the carrier to take it. Only the carrier scores
+  (+10/s). Most points at the buzzer wins.
+- **Death screen** shows who killed you, the sniper they used, and the live
+  scoreboard — then hit RESPAWN. Your best run of the match replays as the
+  **BEST PLAY** at the end.
+- **Medals** pop for kill chains (DOUBLE KILL, TRIPLE KILL, MULTI-KILL…) and
+  streaks: 5 BLOODTHIRSTY · 10 MERCILESS · 15 RELENTLESS · 20 BRUTAL · 25 NUCLEAR.
+- **3 rotating maps**, a new one each match: Downtown Rooftops, Neon Docks, Dust Canyon.
+
+## Combat
+- **Damage model**: headshots always kill. Body shots deal your rifle's DMG
+  against 100 HP — some rifles need two hits. Enemy HP bars show the damage.
+- **Bolt-action** rifles cycle between shots; two **semi-autos** rip fast.
+  Every rifle has its own damage, mag size, rechamber and ADS speed (in the Armory).
+- **Legendary rifles fire special projectiles**, each with a listed bonus:
+  - **Suncrown Regent — SOLAR LANCE**: a beam that pierces to a 2nd enemy
+  - **Inferno Parade — IMMOLATION**: flaming rounds, burn DoT, fiery explosions
+  - **Aurora Veil — CHAIN LIGHTNING**: Zeus-pylon rifle; hits arc to a nearby enemy
+  - **Kraken Depth — DEEP FREEZE**: chills enemies (aim slowed), kills shatter
+  - **Widow Waltz — EVENT HORIZON**: kills implode, damaging nearby enemies
+  - **Monarch Decree — GILDED ROUNDS**: kills pay +50% coins
+  Each one changes your ADS reticle and shot sound to match its projectile.
+- **Cases**: Standard (100⬢), Elite (300⬢), Phantom (800⬢) drop rifles or one of
+  **12 kill effects**; duplicates convert back into coins.
+- **Pause menu** (top-right): aim sensitivity, restart match, exit.
 
 ## Controls
 - Drag to look · scroll wheel pans · ZOOM button or `Z` cycles scope
 - FIRE button, tap the scope, side button, or `Space` to shoot
-- Hold DUCK (or `↓`) to take cover — their shots miss, but you can't fire
+- Hold the big DUCK button (or `↓`) to take cover — their shots miss
 
 ## Install on R1
 Creations card → create tab → **add via QR code** → scan the creation code.
