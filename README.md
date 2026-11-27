@@ -3,13 +3,15 @@
 An original arena sniping game built for the Rabbit R1 (240×282), by **Jeff H. (MrGhost)**.
 All art, item names and code are original to this creation.
 
+**Version 7.0** — fairer FFA: enemies now fight each other, and at most 2 snipers hunt you at once (usually fewer). Scope bug fixed — a drawing glitch put a black diagonal band across the zoomed view; the scope is also bigger now. Matches are 2:00. Best Play now shows your reticle, projectiles and kill effects. A rifle's signature kill effect now overrides your selected one. NEW legendary: **Grand Finale**, a firework sniper whose kills bloom into color-shifting fireworks (plus the Firework Bloom kill effect in cases). Rare-rifle artwork reined in so every design reads as a rifle first.
+
 **Version 6.1** — callsign entry fixed (sturdier name box + a built-in letter picker on the title screen, tap ABC).
 **Version 6.0** — pregame lobby with map voting, 2 new maps (Neon Spire, Back
 Alley), TDM removed, FFA is a race to 30 kills, FLAG HUNT ranked by flag points,
 a saved player callsign, and a fanfare winner screen.
 (5.0 rebuilt the rarity ladder: LEGENDARY on top, ULTRA below it, unique tracers.)
 
-## The Match (3:00, respawns)
+## The Match (2:00, respawns)
 - **Set your callsign** in the name box on the title screen — it is saved, shown
   on the scoreboard, and announced if you win.
 - **PREGAME LOBBY** — before every match you see all 6 players and their loadouts,
