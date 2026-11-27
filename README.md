@@ -54,7 +54,7 @@ a saved player callsign, and a fanfare winner screen.
 - **Epic + Mythic rifles fire unique tracers** (Pulse, Ember, Frost, Arc, Void),
   named on their Armory stat line.
 - **Cases**: Standard (100⬢), Elite (300⬢), Ultra (800⬢) drop rifles or one of
-  **12 kill effects**; the **Kill FX Chest** (250⬢) drops kill effects only.
+  **13 kill effects**; the **Kill FX Chest** (250⬢) drops kill effects only.
   Every player starts with **one chest of each kind**. Opening a case plays a
   spinning prize reel that slows onto your drop, with a rarity-tiered reveal.
   Duplicates convert back into coins.
